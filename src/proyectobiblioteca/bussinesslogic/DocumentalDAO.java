@@ -150,12 +150,12 @@ public class DocumentalDAO implements IDocumental {
     }
 
     @Override
-    public ObservableList<Documental> selectEditor(ObservableList<Documental> tableInfo, String editor) {
+    public ObservableList<Documental> selectEditor(ObservableList<Documental> tableInfo, String editor, String SQL) {
         connect = DBConnection.getConnection();
         Documental documental = null;
         if (connect != null) {
             try {
-                preStatement = connect.prepareStatement(SQL_SELECT_EDITOR);
+                preStatement = connect.prepareStatement(SQL);
                 preStatement.setString(1, editor);
                 ResultSet rSet = preStatement.executeQuery();
                 while (rSet.next()) {

@@ -13,7 +13,7 @@
    <children>
       <TextField fx:id="texfFieldBarraBusqueda" layoutX="27.0" layoutY="36.0" prefHeight="26.0" prefWidth="489.0" />
       <Button layoutX="516.0" layoutY="36.0" mnemonicParsing="false" onAction="#clicBuscar" text="Buscar" />
-      <TableView fx:id="tableViewRecusoDocumental" layoutX="27.0" layoutY="132.0" prefHeight="365.0" prefWidth="766.0">
+      <TableView fx:id="tableViewRecursoDocumental" layoutX="27.0" layoutY="132.0" prefHeight="365.0" prefWidth="766.0">
         <columns>
           <TableColumn fx:id="columnTitulo" prefWidth="75.0" text="Titulo" />
           <TableColumn fx:id="columnAutor" prefWidth="75.0" text="Autor" />
@@ -29,10 +29,10 @@
       <Button layoutX="739.0" layoutY="521.0" mnemonicParsing="false" onAction="#clicEditar" text="Editar" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="51.0" layoutX="24.0" layoutY="71.0" stroke="BLACK" strokeType="INSIDE" width="766.0" />
       <Label layoutX="33.0" layoutY="71.0" text="Tipo:" />
-      <CheckBox fx:id="chechListTitulo" layoutX="75.0" layoutY="79.0" mnemonicParsing="false" text="Titulo" />
-      <CheckBox fx:id="chechListAutor" layoutX="147.0" layoutY="79.0" mnemonicParsing="false" text="Autor" />
-      <CheckBox fx:id="checkListEdicion" layoutX="231.0" layoutY="79.0" mnemonicParsing="false" text="Editor" />
-      <CheckBox fx:id="checkListTema" layoutX="313.0" layoutY="79.0" mnemonicParsing="false" text="Tema" />
-      <CheckBox fx:id="checkListCodigoBarras" layoutX="386.0" layoutY="79.0" mnemonicParsing="false" text="Codigo de barras" />
+      <CheckBox fx:id="checkListTitulo" layoutX="75.0" layoutY="79.0" mnemonicParsing="false" onAction="#clickTitulo" text="Titulo" />
+      <CheckBox fx:id="checkListAutor" layoutX="147.0" layoutY="79.0" mnemonicParsing="false" onAction="#clickAutor" text="Autor" />
+      <CheckBox fx:id="checkListEditor" layoutX="231.0" layoutY="79.0" mnemonicParsing="false" onAction="#clickEditor" text="Editor" />
+      <CheckBox fx:id="checkListTema" layoutX="313.0" layoutY="79.0" mnemonicParsing="false" onAction="#clickTema" text="Tema" />
+      <CheckBox fx:id="checkListCodigoBarras" layoutX="386.0" layoutY="79.0" mnemonicParsing="false" onAction="#clickCodigoBarras" text="Codigo de barras" />
    </children>
 </AnchorPane>

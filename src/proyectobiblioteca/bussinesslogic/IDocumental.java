@@ -18,7 +18,7 @@ public interface IDocumental {
 
     public ObservableList<Documental> selectAutor(ObservableList<Documental> tableInfo, String autor);
 
-    public ObservableList<Documental> selectEditor(ObservableList<Documental> tableInfo, String editor);
+    public ObservableList<Documental> selectEditor(ObservableList<Documental> tableInfo, String editor,String SQL);
 
     public ObservableList<Documental> selectTema(ObservableList<Documental> tableInfo, String tema);
 
