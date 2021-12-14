@@ -6,7 +6,6 @@ package proyectobiblioteca.bussinesslogic;
 
 import javafx.collections.ObservableList;
 import proyectobiblioteca.domain.Documental;
-
 /**
  *
  * @author Saulo
