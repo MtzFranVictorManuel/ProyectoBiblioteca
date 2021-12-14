@@ -12,7 +12,7 @@ import java.sql.SQLException;
 
 /**
  *
- * @author Saulo
+ * @author victormanuel
  */
 public class DBConnection {
     private static final String JDBC_USER="root";

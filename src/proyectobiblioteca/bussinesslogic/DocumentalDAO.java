@@ -14,7 +14,7 @@ import proyectobiblioteca.dataaccess.DBConnection;
 import proyectobiblioteca.domain.Documental;
 /**
  *
- * @author Saulo
+ * @author victormanuel
  */
 public class DocumentalDAO implements IDocumental {
     private Connection connection;

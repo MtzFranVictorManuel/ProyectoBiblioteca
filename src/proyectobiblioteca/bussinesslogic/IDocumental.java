@@ -8,7 +8,7 @@ import javafx.collections.ObservableList;
 import proyectobiblioteca.domain.Documental;
 /**
  *
- * @author Saulo
+ * @author victormanuel
  */
 public interface IDocumental {
 

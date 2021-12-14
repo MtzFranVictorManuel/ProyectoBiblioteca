@@ -6,7 +6,7 @@ package proyectobiblioteca.bussinesslogic;
 
 /**
  *
- * @author Saulo
+ * @author victormanuel
  */
 public class DocumentalConstants {
     public static final String SQL_SELECT = "SELECT * FROM recursodocumental;";

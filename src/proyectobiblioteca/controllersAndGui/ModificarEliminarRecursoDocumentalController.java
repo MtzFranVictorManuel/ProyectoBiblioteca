@@ -98,7 +98,7 @@ public class ModificarEliminarRecursoDocumentalController implements Initializab
     }
 
     public void clicEditar(ActionEvent actionEvent){
-        Documental documental = new Documental();
+        Documental documental;
         documentalList = tableViewRecursoDocumental.getSelectionModel().getSelectedItems();
         if (documentalList.isEmpty()) {
             Alert alertInfo = new Alert(Alert.AlertType.WARNING);
@@ -118,7 +118,11 @@ public class ModificarEliminarRecursoDocumentalController implements Initializab
         }
     }
     public void clicEliminar(ActionEvent actionEvent){
-        
+        Alert alertInfo = new Alert(Alert.AlertType.WARNING);
+        alertInfo.setTitle("Error");
+        alertInfo.setHeaderText("No Implemented Yet!");
+        alertInfo.setContentText("Sorry for the inconvenience this button is not working now");
+        alertInfo.showAndWait();
     }
     public void clicBuscar(ActionEvent actionEvent){
         setTableView();

@@ -6,7 +6,7 @@ package proyectobiblioteca.domain;
 
 /**
  *
- * @author Saulo
+ * @author victormanuel
  */
 public class Documental {
     private static int idRecursoDocumental;
