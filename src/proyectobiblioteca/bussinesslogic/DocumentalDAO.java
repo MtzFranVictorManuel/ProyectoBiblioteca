@@ -43,11 +43,11 @@ public class DocumentalDAO implements IDocumental {
         Documental documental = null;
         if (connect != null) {
             try {
-                preStatement = connect.prepareStatement(SQL_SELECT_TITULO);
+                preStatement = connect.prepareStatement(SQL_SELECT);
                 ResultSet rSet = preStatement.executeQuery();
                 while (rSet.next()) {
                     documental = new Documental();
-                    //documental.setIdRecursoDocumental(rSet.getInt("idRecursoDocumental"));
+                    documental.setIdRecursoDocumental(rSet.getInt("idRecursoDocumental"));
                     documental.setCodigoBarras(rSet.getString("codigoBarras"));
                     documental.setAutor(rSet.getString("autor"));
                     documental.setTitulo(rSet.getString("titulo"));
@@ -56,7 +56,7 @@ public class DocumentalDAO implements IDocumental {
                     documental.setEditor(rSet.getString("editor"));
                     documental.setTema(rSet.getString("tema"));
                     documental.setTipoMaterial(rSet.getString("tipoMaterial"));
-                    documental.setNumCopias(rSet.getString("numCopias"));
+                    documental.setNumCopias(rSet.getInt("numCopias"));
                     tableInfo.add(documental);
                 }
 
@@ -71,7 +71,7 @@ public class DocumentalDAO implements IDocumental {
                 }
             }
         }
-        return documental;
+        return tableInfo;
     }
 
     @Override
@@ -94,7 +94,7 @@ public class DocumentalDAO implements IDocumental {
                     documental.setEditor(rSet.getString("editor"));
                     documental.setTema(rSet.getString("tema"));
                     documental.setTipoMaterial(rSet.getString("tipoMaterial"));
-                    documental.setNumCopias(rSet.getString("numCopias"));
+                    documental.setNumCopias(rSet.getInt("numCopias"));
                     tableInfo.add(documental);
                 }
 
@@ -109,11 +109,11 @@ public class DocumentalDAO implements IDocumental {
                 }
             }
         }
-        return documental;
+        return tableInfo;
     }
 
     @Override
-    public Documental selectAutor(String autor) {
+    public ObservableList<Documental> selectAutor(ObservableList<Documental> tableInfo, String autor) {
         connect = DBConnection.getConnection();
         Documental documental = null;
         if (connect != null) {
@@ -121,7 +121,7 @@ public class DocumentalDAO implements IDocumental {
                 preStatement = connect.prepareStatement(SQL_SELECT_AUTOR);
                 preStatement.setString(1, autor);
                 ResultSet rSet = preStatement.executeQuery();
-                if (rSet.next()) {
+                while (rSet.next()) {
                     documental = new Documental();
                     documental.setIdRecursoDocumental(rSet.getInt("idRecursoDocumental"));
                     documental.setCodigoBarras(rSet.getString("codigoBarras"));
@@ -132,10 +132,11 @@ public class DocumentalDAO implements IDocumental {
                     documental.setEditor(rSet.getString("editor"));
                     documental.setTema(rSet.getString("tema"));
                     documental.setTipoMaterial(rSet.getString("tipoMaterial"));
-                    documental.setNumCopias(rSet.getString("numCopias"));
-                    DBConnection.close(rSet);
-                    return documental;
+                    documental.setNumCopias(rSet.getInt("numCopias")); 
+                    tableInfo.add(documental);
                 }
+                DBConnection.close(rSet);
+                return tableInfo;
             } catch (SQLException exception) {
                 System.out.println(exception.getMessage());
             } finally { 
@@ -145,11 +146,11 @@ public class DocumentalDAO implements IDocumental {
                 }
             }
         }
-        return documental;
+        return tableInfo;
     }
 
     @Override
-    public Documental selectEditor(String editor) {
+    public ObservableList<Documental> selectEditor(ObservableList<Documental> tableInfo, String editor) {
         connect = DBConnection.getConnection();
         Documental documental = null;
         if (connect != null) {
@@ -157,7 +158,7 @@ public class DocumentalDAO implements IDocumental {
                 preStatement = connect.prepareStatement(SQL_SELECT_EDITOR);
                 preStatement.setString(1, editor);
                 ResultSet rSet = preStatement.executeQuery();
-                if (rSet.next()) {
+                while (rSet.next()) {
                     documental = new Documental();
                     documental.setIdRecursoDocumental(rSet.getInt("idRecursoDocumental"));
                     documental.setCodigoBarras(rSet.getString("codigoBarras"));
@@ -168,10 +169,11 @@ public class DocumentalDAO implements IDocumental {
                     documental.setEditor(rSet.getString("editor"));
                     documental.setTema(rSet.getString("tema"));
                     documental.setTipoMaterial(rSet.getString("tipoMaterial"));
-                    documental.setNumCopias(rSet.getString("numCopias"));
-                    DBConnection.close(rSet);
-                    return documental;
+                    documental.setNumCopias(rSet.getInt("numCopias"));
+                    tableInfo.add(documental);
                 }
+                DBConnection.close(rSet);
+                return tableInfo;
             } catch (SQLException exception) {
                 System.out.println(exception.getMessage());
             } finally { 
@@ -181,11 +183,11 @@ public class DocumentalDAO implements IDocumental {
                 }
             }
         }
-        return documental;
+        return tableInfo;
     }
 
     @Override
-    public Documental selectTema(String tema) {
+    public ObservableList<Documental> selectTema(ObservableList<Documental> tableInfo, String tema) {
         connect = DBConnection.getConnection();
         Documental documental = null;
         if (connect != null) {
@@ -193,7 +195,7 @@ public class DocumentalDAO implements IDocumental {
                 preStatement = connect.prepareStatement(SQL_SELECT_TEMA);
                 preStatement.setString(1, tema);
                 ResultSet rSet = preStatement.executeQuery();
-                if (rSet.next()) {
+                while (rSet.next()) {
                     documental = new Documental();
                     documental.setIdRecursoDocumental(rSet.getInt("idRecursoDocumental"));
                     documental.setCodigoBarras(rSet.getString("codigoBarras"));
@@ -204,10 +206,11 @@ public class DocumentalDAO implements IDocumental {
                     documental.setEditor(rSet.getString("editor"));
                     documental.setTema(rSet.getString("tema"));
                     documental.setTipoMaterial(rSet.getString("tipoMaterial"));
-                    documental.setNumCopias(rSet.getString("numCopias"));
-                    DBConnection.close(rSet);
-                    return documental;
+                    documental.setNumCopias(rSet.getInt("numCopias"));
+                    tableInfo.add(documental);
                 }
+                DBConnection.close(rSet);
+                return tableInfo;
             } catch (SQLException exception) {
                 System.out.println(exception.getMessage());
             } finally { 
@@ -217,11 +220,11 @@ public class DocumentalDAO implements IDocumental {
                 }
             }
         }
-        return documental;
+        return tableInfo;
     }
 
     @Override
-    public Documental selectCodigoBarras(String codigoBarras) {
+    public ObservableList<Documental> selectCodigoBarras(ObservableList<Documental> tableInfo, String codigoBarras) {
         connect = DBConnection.getConnection();
         Documental documental = null;
         if (connect != null) {
@@ -229,7 +232,7 @@ public class DocumentalDAO implements IDocumental {
                 preStatement = connect.prepareStatement(SQL_SELECT_CODIGOBARRAS);
                 preStatement.setString(1, codigoBarras);
                 ResultSet rSet = preStatement.executeQuery();
-                if (rSet.next()) {
+                while (rSet.next()) {
                     documental = new Documental();
                     documental.setIdRecursoDocumental(rSet.getInt("idRecursoDocumental"));
                     documental.setCodigoBarras(rSet.getString("codigoBarras"));
@@ -240,10 +243,11 @@ public class DocumentalDAO implements IDocumental {
                     documental.setEditor(rSet.getString("editor"));
                     documental.setTema(rSet.getString("tema"));
                     documental.setTipoMaterial(rSet.getString("tipoMaterial"));
-                    documental.setNumCopias(rSet.getString("numCopias"));
-                    DBConnection.close(rSet);
-                    return documental;
+                    documental.setNumCopias(rSet.getInt("numCopias"));
+                    tableInfo.add(documental);
                 }
+                DBConnection.close(rSet);
+                return tableInfo;
             } catch (SQLException exception) {
                 System.out.println(exception.getMessage());
             } finally { 
@@ -253,7 +257,7 @@ public class DocumentalDAO implements IDocumental {
                 }
             }
         }
-        return documental;
+        return tableInfo;
     }
 
     @Override

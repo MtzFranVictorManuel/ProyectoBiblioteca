@@ -10,22 +10,22 @@ package proyectobiblioteca.domain;
  */
 public class Documental {
     private static int idRecursoDocumental;
-    private static String codigoBarras;
-    private static String autor;
-    private static String titulo;
-    private static String clasificacionLC;
-    private static String descripcion;
-    private static String editor;
-    private static String tema;
-    private static String tipoMaterial;
-    private static String numCopias;
+    private String codigoBarras;
+    private String autor;
+    private String titulo;
+    private String clasificacionLC;
+    private String descripcion;
+    private String editor;
+    private String tema;
+    private String tipoMaterial;
+    private int numCopias;
 
     public Documental() {
     
     }
 
     public Documental(int idRecursoDocumental, String codigoBarras, String autor, String titulo, String clasificacionLC, 
-        String descripcion, String editor, String tema, String tipoMaterial, String numCopias) {
+        String descripcion, String editor, String tema, String tipoMaterial, int numCopias) {
         this.idRecursoDocumental = idRecursoDocumental;
         this.codigoBarras = codigoBarras;
         this.autor = autor;
@@ -51,7 +51,7 @@ public class Documental {
     }
 
     public void setCodigoBarras(String codigoBarras) {
-        Documental.codigoBarras = codigoBarras;
+        this.codigoBarras = codigoBarras;
     }
 
     public String getAutor() {
@@ -59,15 +59,15 @@ public class Documental {
     }
 
     public void setAutor(String autor) {
-        Documental.autor = autor;
+        this.autor = autor;
     }
 
     public String getTitulo() {
         return titulo;
     }
 
-    public static void setTitulo(String titulo) {
-        Documental.titulo = titulo;
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
     }
 
     public String getClasificacionLC() {
@@ -75,7 +75,7 @@ public class Documental {
     }
 
     public void setClasificacionLC(String clasificacionLC) {
-        Documental.clasificacionLC = clasificacionLC;
+        this.clasificacionLC = clasificacionLC;
     }
 
     public String getDescripcion() {
@@ -83,7 +83,7 @@ public class Documental {
     }
 
     public void setDescripcion(String descripcion) {
-        Documental.descripcion = descripcion;
+        this.descripcion = descripcion;
     }
 
     public String getEditor() {
@@ -91,15 +91,15 @@ public class Documental {
     }
 
     public void setEditor(String editor) {
-        Documental.editor = editor;
+        this.editor = editor;
     }
 
     public String getTema() {
         return tema;
     }
 
-    public static void setTema(String tema) {
-        Documental.tema = tema;
+    public void setTema(String tema) {
+        this.tema = tema;
     }
 
     public String getTipoMaterial() {
@@ -107,15 +107,15 @@ public class Documental {
     }
 
     public void setTipoMaterial(String tipoMaterial) {
-        Documental.tipoMaterial = tipoMaterial;
+        this.tipoMaterial = tipoMaterial;
     }
 
-    public String getNumCopias() {
+    public int getNumCopias() {
         return numCopias;
     }
 
-    public void setNumCopias(String numCopias) {
-        Documental.numCopias = numCopias;
+    public void setNumCopias(int numCopias) {
+        this.numCopias = numCopias;
     }
 
 }

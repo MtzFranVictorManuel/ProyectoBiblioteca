@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Rectangle?>
 
-<AnchorPane id="AnchorPane" prefHeight="559.0" prefWidth="813.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="proyectobiblioteca.controllersAndGui.ModificarEliminarRecursoDocumentalController">
+<AnchorPane id="AnchorPane" prefHeight="559.0" prefWidth="813.0" style="-fx-background-color: white;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17" fx:controller="proyectobiblioteca.controllersAndGui.ModificarEliminarRecursoDocumentalController">
    <children>
       <TextField fx:id="texfFieldBarraBusqueda" layoutX="27.0" layoutY="36.0" prefHeight="26.0" prefWidth="489.0" />
       <Button layoutX="516.0" layoutY="36.0" mnemonicParsing="false" onAction="#clicBuscar" text="Buscar" />
@@ -17,11 +17,11 @@
         <columns>
           <TableColumn fx:id="columnTitulo" prefWidth="75.0" text="Titulo" />
           <TableColumn fx:id="columnAutor" prefWidth="75.0" text="Autor" />
-            <TableColumn fx:id="columnEdicion" prefWidth="75.0" text="Editor" />
-            <TableColumn fx:id="columnTemas" prefWidth="105.0" text="Temas" />
+            <TableColumn fx:id="columnEditor" prefWidth="75.0" text="Editor" />
+            <TableColumn fx:id="columnTema" prefWidth="105.0" text="Temas" />
             <TableColumn fx:id="columnDescripcion" prefWidth="168.0" text="Descripción" />
             <TableColumn fx:id="columnClasificacionLC" prefWidth="166.0" text="Calificación LC:" />
-            <TableColumn fx:id="columTipoMaterial" prefWidth="101.0" text="Tipo de material" />
+            <TableColumn fx:id="columnTipoMaterial" prefWidth="101.0" text="Tipo de material" />
         </columns>
       </TableView>
       <Button layoutX="27.0" layoutY="520.0" mnemonicParsing="false" onAction="#clicSalir" text="Salir" />

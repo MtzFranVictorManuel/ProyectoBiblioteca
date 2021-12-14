@@ -47,7 +47,7 @@ public class ModificarEliminarRecursoDocumentalController implements Initializab
     private TableColumn columnTipoMaterial;
 
     @FXML
-    private TableView<Documental> tableViewDocumental;
+    private TableView<Documental> tableViewRecusoDocumental;
 
     private ObservableList<Documental> documentalList;
     /**
@@ -56,14 +56,14 @@ public class ModificarEliminarRecursoDocumentalController implements Initializab
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         documentalList = FXCollections.observableArrayList();
-        this.columnTitulo.setCellValueFactory(new PropertyValueFactory("columnTitulo"));
-        this.columnTitulo.setCellValueFactory(new PropertyValueFactory("columnAutor"));
-        this.columnTitulo.setCellValueFactory(new PropertyValueFactory("columnEditor"));
-        this.columnTitulo.setCellValueFactory(new PropertyValueFactory("columnTemas"));
-        this.columnTitulo.setCellValueFactory(new PropertyValueFactory("columnDescripcion"));
-        this.columnTitulo.setCellValueFactory(new PropertyValueFactory("columnClasificacion"));
-        this.columnTitulo.setCellValueFactory(new PropertyValueFactory("columTipoMaterial"));
-        tableViewDocumental.setItems(documentalDAO.select(documentalList));
+        this.columnTitulo.setCellValueFactory(new PropertyValueFactory("titulo"));
+        this.columnAutor.setCellValueFactory(new PropertyValueFactory("autor"));
+        this.columnEditor.setCellValueFactory(new PropertyValueFactory("editor"));
+        this.columnTema.setCellValueFactory(new PropertyValueFactory("tema"));
+        this.columnDescripcion.setCellValueFactory(new PropertyValueFactory("descripcion"));
+        this.columnClasificacionLC.setCellValueFactory(new PropertyValueFactory("clasificacionLC"));
+        this.columnTipoMaterial.setCellValueFactory(new PropertyValueFactory("tipoMaterial"));
+        tableViewRecusoDocumental.setItems(documentalDAO.select(documentalList));
     }    
     
     public void clicSalir(ActionEvent actionEvent){
