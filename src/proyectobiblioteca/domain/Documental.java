@@ -18,14 +18,14 @@ public class Documental {
     private static String editor;
     private static String tema;
     private static String tipoMaterial;
-    private static String numCopias;
+    private static int numCopias;
 
     public Documental() {
     
     }
 
     public Documental(int idRecursoDocumental, String codigoBarras, String autor, String titulo, String clasificacionLC, 
-        String descripcion, String editor, String tema, String tipoMaterial, String numCopias) {
+        String descripcion, String editor, String tema, String tipoMaterial, int numCopias) {
         this.idRecursoDocumental = idRecursoDocumental;
         this.codigoBarras = codigoBarras;
         this.autor = autor;
@@ -110,11 +110,11 @@ public class Documental {
         Documental.tipoMaterial = tipoMaterial;
     }
 
-    public String getNumCopias() {
+    public int getNumCopias() {
         return numCopias;
     }
 
-    public void setNumCopias(String numCopias) {
+    public void setNumCopias(int numCopias) {
         Documental.numCopias = numCopias;
     }
 
