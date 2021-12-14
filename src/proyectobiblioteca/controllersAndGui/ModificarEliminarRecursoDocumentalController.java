@@ -11,10 +11,13 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import proyectobiblioteca.bussinesslogic.DocumentalConstants;
 import proyectobiblioteca.bussinesslogic.DocumentalDAO;
 import proyectobiblioteca.domain.Documental;
 
@@ -25,6 +28,7 @@ import proyectobiblioteca.domain.Documental;
  */
 public class ModificarEliminarRecursoDocumentalController implements Initializable {
     DocumentalDAO documentalDAO = new DocumentalDAO();
+    DocumentalConstants documentalConstants = new DocumentalConstants();
 
     @FXML
     private TableColumn columnTitulo;
@@ -65,17 +69,21 @@ public class ModificarEliminarRecursoDocumentalController implements Initializab
     @FXML
     private CheckBox checkListCodigoBarras;
 
+    @FXML
+    private TextField textFieldBarraBusqueda;
+
     private ObservableList<Documental> documentalList;
 
-    private String filter;
+    private String SQLQuery = "";
+    private String valueSearch = ""; 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        filter = "";
+        SQLQuery = DocumentalConstants.SQL_SELECT;
         setTableView();
-        tableViewRecursoDocumental.setItems(documentalDAO.select(documentalList));
+        tableViewRecursoDocumental.setItems(documentalDAO.select(documentalList, SQLQuery));
     }    
     
     public void clicSalir(ActionEvent actionEvent){
@@ -89,7 +97,26 @@ public class ModificarEliminarRecursoDocumentalController implements Initializab
     }
     public void clicBuscar(ActionEvent actionEvent){
         setTableView();
-        //tableViewRecursoDocumental.setItems(documentalDAO.selectEditor(documentalList, "XALAPA" ,documentalDAO.SQL_SELECT_EDITOR));
+        valueSearch = textFieldBarraBusqueda.getText();
+
+        if(!valueSearch.isEmpty() && (!checkListTitulo.isSelected() && !checkListAutor.isSelected() && !checkListEditor.isSelected()
+            && !checkListTema.isSelected() && !checkListCodigoBarras.isSelected())) {
+            Alert alertInfo = new Alert(Alert.AlertType.WARNING);
+            alertInfo.setTitle("Error");
+            alertInfo.setHeaderText("No Option Selected");
+            alertInfo.setContentText("Please select a option to do the search");
+            alertInfo.showAndWait();
+        }
+
+        if(valueSearch.isEmpty() && (!checkListTitulo.isSelected() && !checkListAutor.isSelected() && !checkListEditor.isSelected()
+            && !checkListTema.isSelected() && !checkListCodigoBarras.isSelected())) {
+            tableViewRecursoDocumental.setItems(documentalDAO.select(documentalList, SQLQuery));
+        }
+
+        if(!valueSearch.isEmpty() && (checkListTitulo.isSelected() || checkListAutor.isSelected() || checkListEditor.isSelected()
+            || checkListTema.isSelected() || checkListCodigoBarras.isSelected())) {        
+            tableViewRecursoDocumental.setItems(documentalDAO.select(documentalList, valueSearch, SQLQuery));
+        } 
     }
 
     public void setTableView() {
@@ -112,7 +139,7 @@ public class ModificarEliminarRecursoDocumentalController implements Initializab
 
     public void clickTitulo(ActionEvent actionEvent) {
         if (checkListTitulo.isSelected()) {
-            filter = "titulo";
+            SQLQuery = DocumentalConstants.SQL_SELECT_TITULO;
             setCheckBoxEnableOrDisable(false, true, true, true, true);
         } else {
             setCheckBoxEnableOrDisable(false, false, false, false, false);
@@ -121,7 +148,7 @@ public class ModificarEliminarRecursoDocumentalController implements Initializab
 
     public void clickAutor(ActionEvent actionEvent) {
         if (checkListAutor.isSelected()) {
-            filter = "autor";
+            SQLQuery = DocumentalConstants.SQL_SELECT_AUTOR;
             setCheckBoxEnableOrDisable(true, false, true, true, true);
         } else {
             setCheckBoxEnableOrDisable(false, false, false, false, false);
@@ -130,7 +157,7 @@ public class ModificarEliminarRecursoDocumentalController implements Initializab
 
     public void clickEditor(ActionEvent actionEvent) {
         if (checkListEditor.isSelected()) {
-            filter = "editor";
+            SQLQuery = DocumentalConstants.SQL_SELECT_EDITOR;
             setCheckBoxEnableOrDisable(true, true, false, true, true);
         } else {
             setCheckBoxEnableOrDisable(false, false, false, false, false);
@@ -139,7 +166,7 @@ public class ModificarEliminarRecursoDocumentalController implements Initializab
 
     public void clickTema(ActionEvent actionEvent) {
         if (checkListTema.isSelected()) {
-            filter = "tema";
+            SQLQuery = DocumentalConstants.SQL_SELECT_TEMA;
             setCheckBoxEnableOrDisable(true, true, true, false, true);
         } else { 
             setCheckBoxEnableOrDisable(false, false, false, false, false);
@@ -148,7 +175,7 @@ public class ModificarEliminarRecursoDocumentalController implements Initializab
 
     public void clickCodigoBarras(ActionEvent actionEvent) {
         if (checkListCodigoBarras.isSelected()) {
-            filter = "codigobarras";
+            SQLQuery = DocumentalConstants.SQL_SELECT_CODIGOBARRAS;
             setCheckBoxEnableOrDisable(true, true, true, true, false);
         } else {
             setCheckBoxEnableOrDisable(false, false, false, false, false);

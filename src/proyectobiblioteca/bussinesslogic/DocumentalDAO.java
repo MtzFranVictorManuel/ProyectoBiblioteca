@@ -19,12 +19,6 @@ public class DocumentalDAO implements IDocumental {
     private Connection connection;
     Connection connect = null;
     PreparedStatement preStatement = null;
-    private static final String SQL_SELECT = "SELECT * FROM recursodocumental;";
-    private static final String SQL_SELECT_TITULO = "SELECT * FROM recursodocumental WHERE titulo = ?;";
-    private static final String SQL_SELECT_AUTOR = "SELECT * FROM recursodocumental WHERE autor = ?;";
-    private static final String SQL_SELECT_EDITOR = "SELECT * FROM recursodocumental WHERE editor = ?;";
-    private static final String SQL_SELECT_TEMA = "SELECT * FROM recursodocumental WHERE tema = ?;";
-    private static final String SQL_SELECT_CODIGOBARRAS = "SELECT * FROM recursodocumental WHERE codigobarras = ?;";
     private static final String SQL_UPDATE = "UPDATE recursodocumental SET codigoBarras = ?, autor = ?,"
         + "titulo = ?, clasificacionLC = ?, descripcion = ?, editor = ?, tema = ? WHERE idRecursoDocumental = ?;";
     private static final String SQL_DELETE = "DELETE recursodocumental WHERE titulo = ?;";
@@ -42,12 +36,12 @@ public class DocumentalDAO implements IDocumental {
     }
 
     @Override
-    public ObservableList<Documental> select(ObservableList<Documental> tableInfo) {
+    public ObservableList<Documental> select(ObservableList<Documental> tableInfo, String SQLQuery) {
         connect = DBConnection.getConnection();
         Documental documental = null;
         if (connect != null) {
             try {
-                preStatement = connect.prepareStatement(SQL_SELECT);
+                preStatement = connect.prepareStatement(SQLQuery);
                 ResultSet rSet = preStatement.executeQuery();
                 while (rSet.next()) {
                     documental = new Documental();
@@ -79,162 +73,13 @@ public class DocumentalDAO implements IDocumental {
     }
 
     @Override
-    public ObservableList<Documental> selectTitulo(ObservableList<Documental> tableInfo, String titulo) {
+    public ObservableList<Documental> select(ObservableList<Documental> tableInfo, String value, String SQLQuery) {
         connect = DBConnection.getConnection();
         Documental documental = null;
         if (connect != null) {
             try {
-                preStatement = connect.prepareStatement(SQL_SELECT_TITULO);
-                preStatement.setString(1, titulo);
-                ResultSet rSet = preStatement.executeQuery();
-                while (rSet.next()) {
-                    documental = new Documental();
-                    documental.setIdRecursoDocumental(rSet.getInt("idRecursoDocumental"));
-                    documental.setCodigoBarras(rSet.getString("codigoBarras"));
-                    documental.setAutor(rSet.getString("autor"));
-                    documental.setTitulo(rSet.getString("titulo"));
-                    documental.setClasificacionLC(rSet.getString("clasificacionLC"));
-                    documental.setDescripcion(rSet.getString("descripcion"));
-                    documental.setEditor(rSet.getString("editor"));
-                    documental.setTema(rSet.getString("tema"));
-                    documental.setTipoMaterial(rSet.getString("tipoMaterial"));
-                    documental.setNumCopias(rSet.getInt("numCopias"));
-                    tableInfo.add(documental);
-                }
-
-                DBConnection.close(rSet);
-                return tableInfo;
-            } catch (SQLException exception) {
-                System.out.println(exception.getMessage());
-            } finally { 
-                DBConnection.close(preStatement);
-                if (this.connection == null) {
-                    DBConnection.close(connect);
-                }
-            }
-        }
-        return tableInfo;
-    }
-
-    @Override
-    public ObservableList<Documental> selectAutor(ObservableList<Documental> tableInfo, String autor) {
-        connect = DBConnection.getConnection();
-        Documental documental = null;
-        if (connect != null) {
-            try {
-                preStatement = connect.prepareStatement(SQL_SELECT_AUTOR);
-                preStatement.setString(1, autor);
-                ResultSet rSet = preStatement.executeQuery();
-                while (rSet.next()) {
-                    documental = new Documental();
-                    documental.setIdRecursoDocumental(rSet.getInt("idRecursoDocumental"));
-                    documental.setCodigoBarras(rSet.getString("codigoBarras"));
-                    documental.setAutor(rSet.getString("autor"));
-                    documental.setTitulo(rSet.getString("titulo"));
-                    documental.setClasificacionLC(rSet.getString("clasificacionLC"));
-                    documental.setDescripcion(rSet.getString("descripcion"));
-                    documental.setEditor(rSet.getString("editor"));
-                    documental.setTema(rSet.getString("tema"));
-                    documental.setTipoMaterial(rSet.getString("tipoMaterial"));
-                    documental.setNumCopias(rSet.getInt("numCopias")); 
-                    tableInfo.add(documental);
-                }
-                DBConnection.close(rSet);
-                return tableInfo;
-            } catch (SQLException exception) {
-                System.out.println(exception.getMessage());
-            } finally { 
-                DBConnection.close(preStatement);
-                if (this.connection == null) {
-                    DBConnection.close(connect);
-                }
-            }
-        }
-        return tableInfo;
-    }
-
-    @Override
-    public ObservableList<Documental> selectEditor(ObservableList<Documental> tableInfo, String editor, String SQL) {
-        connect = DBConnection.getConnection();
-        Documental documental = null;
-        if (connect != null) {
-            try {
-                preStatement = connect.prepareStatement(SQL);
-                preStatement.setString(1, editor);
-                ResultSet rSet = preStatement.executeQuery();
-                while (rSet.next()) {
-                    documental = new Documental();
-                    documental.setIdRecursoDocumental(rSet.getInt("idRecursoDocumental"));
-                    documental.setCodigoBarras(rSet.getString("codigoBarras"));
-                    documental.setAutor(rSet.getString("autor"));
-                    documental.setTitulo(rSet.getString("titulo"));
-                    documental.setClasificacionLC(rSet.getString("clasificacionLC"));
-                    documental.setDescripcion(rSet.getString("descripcion"));
-                    documental.setEditor(rSet.getString("editor"));
-                    documental.setTema(rSet.getString("tema"));
-                    documental.setTipoMaterial(rSet.getString("tipoMaterial"));
-                    documental.setNumCopias(rSet.getInt("numCopias"));
-                    tableInfo.add(documental);
-                }
-                DBConnection.close(rSet);
-                return tableInfo;
-            } catch (SQLException exception) {
-                System.out.println(exception.getMessage());
-            } finally { 
-                DBConnection.close(preStatement);
-                if (this.connection == null) {
-                    DBConnection.close(connect);
-                }
-            }
-        }
-        return tableInfo;
-    }
-
-    @Override
-    public ObservableList<Documental> selectTema(ObservableList<Documental> tableInfo, String tema) {
-        connect = DBConnection.getConnection();
-        Documental documental = null;
-        if (connect != null) {
-            try {
-                preStatement = connect.prepareStatement(SQL_SELECT_TEMA);
-                preStatement.setString(1, tema);
-                ResultSet rSet = preStatement.executeQuery();
-                while (rSet.next()) {
-                    documental = new Documental();
-                    documental.setIdRecursoDocumental(rSet.getInt("idRecursoDocumental"));
-                    documental.setCodigoBarras(rSet.getString("codigoBarras"));
-                    documental.setAutor(rSet.getString("autor"));
-                    documental.setTitulo(rSet.getString("titulo"));
-                    documental.setClasificacionLC(rSet.getString("clasificacionLC"));
-                    documental.setDescripcion(rSet.getString("descripcion"));
-                    documental.setEditor(rSet.getString("editor"));
-                    documental.setTema(rSet.getString("tema"));
-                    documental.setTipoMaterial(rSet.getString("tipoMaterial"));
-                    documental.setNumCopias(rSet.getInt("numCopias"));
-                    tableInfo.add(documental);
-                }
-                DBConnection.close(rSet);
-                return tableInfo;
-            } catch (SQLException exception) {
-                System.out.println(exception.getMessage());
-            } finally { 
-                DBConnection.close(preStatement);
-                if (this.connection == null) {
-                    DBConnection.close(connect);
-                }
-            }
-        }
-        return tableInfo;
-    }
-
-    @Override
-    public ObservableList<Documental> selectCodigoBarras(ObservableList<Documental> tableInfo, String codigoBarras) {
-        connect = DBConnection.getConnection();
-        Documental documental = null;
-        if (connect != null) {
-            try {
-                preStatement = connect.prepareStatement(SQL_SELECT_CODIGOBARRAS);
-                preStatement.setString(1, codigoBarras);
+                preStatement = connect.prepareStatement(SQLQuery);
+                preStatement.setString(1, value);
                 ResultSet rSet = preStatement.executeQuery();
                 while (rSet.next()) {
                     documental = new Documental();

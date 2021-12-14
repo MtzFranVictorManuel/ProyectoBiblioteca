@@ -11,7 +11,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="559.0" prefWidth="813.0" style="-fx-background-color: white;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17" fx:controller="proyectobiblioteca.controllersAndGui.ModificarEliminarRecursoDocumentalController">
    <children>
-      <TextField fx:id="texfFieldBarraBusqueda" layoutX="27.0" layoutY="36.0" prefHeight="26.0" prefWidth="489.0" />
+      <TextField fx:id="textFieldBarraBusqueda" layoutX="27.0" layoutY="36.0" prefHeight="26.0" prefWidth="489.0" />
       <Button layoutX="516.0" layoutY="36.0" mnemonicParsing="false" onAction="#clicBuscar" text="Buscar" />
       <TableView fx:id="tableViewRecursoDocumental" layoutX="27.0" layoutY="132.0" prefHeight="365.0" prefWidth="766.0">
         <columns>

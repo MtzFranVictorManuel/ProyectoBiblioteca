@@ -12,17 +12,9 @@ import proyectobiblioteca.domain.Documental;
  */
 public interface IDocumental {
 
-    public ObservableList<Documental> select(ObservableList<Documental> tableInfo);
+    public ObservableList<Documental> select(ObservableList<Documental> tableInfo, String SQLQuery);
 
-    public ObservableList<Documental> selectTitulo(ObservableList<Documental> tableInfo, String titulo);
-
-    public ObservableList<Documental> selectAutor(ObservableList<Documental> tableInfo, String autor);
-
-    public ObservableList<Documental> selectEditor(ObservableList<Documental> tableInfo, String editor,String SQL);
-
-    public ObservableList<Documental> selectTema(ObservableList<Documental> tableInfo, String tema);
-
-    public ObservableList<Documental> selectCodigoBarras(ObservableList<Documental> tableInfo, String codigoBarras);
+    public ObservableList<Documental> select(ObservableList<Documental> tableInfo, String value, String SQLQuery);
 
     public boolean update(Documental documental, int idRecursoDocumental);
     
