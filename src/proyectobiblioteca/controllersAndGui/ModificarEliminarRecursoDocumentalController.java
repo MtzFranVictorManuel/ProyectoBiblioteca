@@ -6,6 +6,7 @@ package proyectobiblioteca.controllersAndGui;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 
 /**
@@ -23,4 +24,16 @@ public class ModificarEliminarRecursoDocumentalController implements Initializab
         // TODO
     }    
     
+    public void clicSalir(ActionEvent actionEvent){
+        
+    }
+    public void clicEditar(ActionEvent actionEvent){
+        
+    }
+    public void clicEliminar(ActionEvent actionEvent){
+        
+    }
+    public void clicBuscar(ActionEvent actionEvent){
+        
+    }
 }
