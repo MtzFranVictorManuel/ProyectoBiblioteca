@@ -16,8 +16,8 @@ import proyectobiblioteca.domain.Multimedia;
  * @author victormanuel
  */
 public class MultimediaDAO {
-    private Connection conectarTransmision;
-    Connection conectar = null;
+    private Connection connection;
+    Connection connect = null;
     PreparedStatement preStatement = null;
     Documental recursoDocumen = new Documental();
     
@@ -29,10 +29,10 @@ public class MultimediaDAO {
     }
     
     public int insert(Multimedia multimedia){
-        conectar = DBConnection.getConnection();
+        connect = DBConnection.getConnection();
         int rows = 0;
         try{
-            preStatement = conectar.prepareStatement(INSERT_SQL_RECURSO);
+            preStatement = connect.prepareStatement(INSERT_SQL_RECURSO);
             preStatement.setString(1, multimedia.getTipoMultimedia());
             preStatement.setTime(2, multimedia.getDuracion());
             preStatement.setString(3, multimedia.getFormato());
@@ -41,8 +41,8 @@ public class MultimediaDAO {
             System.out.println("error" + excepcionSQL);
         }finally{
             DBConnection.close(preStatement);
-            if(this.conectarTransmision == null){
-                DBConnection.close(conectar);
+            if(this.connection == null){
+                DBConnection.close(connect);
             }
         }
         return rows;
