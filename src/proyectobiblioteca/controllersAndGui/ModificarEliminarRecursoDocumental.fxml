@@ -17,11 +17,11 @@
         <columns>
           <TableColumn fx:id="columnTitulo" prefWidth="75.0" text="Titulo" />
           <TableColumn fx:id="columnAutor" prefWidth="75.0" text="Autor" />
-            <TableColumn fx:id="columnEdicion" prefWidth="75.0" text="Edición" />
+            <TableColumn fx:id="columnEdicion" prefWidth="75.0" text="Editor" />
             <TableColumn fx:id="columnTemas" prefWidth="105.0" text="Temas" />
             <TableColumn fx:id="columnDescripcion" prefWidth="168.0" text="Descripción" />
-            <TableColumn fx:id="columnCalificacion" prefWidth="166.0" text="Calificación LC:" />
-            <TableColumn fx:id="columTipoMateria" prefWidth="101.0" text="Tipo de material" />
+            <TableColumn fx:id="columnClasificacionLC" prefWidth="166.0" text="Calificación LC:" />
+            <TableColumn fx:id="columTipoMaterial" prefWidth="101.0" text="Tipo de material" />
         </columns>
       </TableView>
       <Button layoutX="27.0" layoutY="520.0" mnemonicParsing="false" onAction="#clicSalir" text="Salir" />
@@ -31,7 +31,7 @@
       <Label layoutX="33.0" layoutY="71.0" text="Tipo:" />
       <CheckBox fx:id="chechListTitulo" layoutX="75.0" layoutY="79.0" mnemonicParsing="false" text="Titulo" />
       <CheckBox fx:id="chechListAutor" layoutX="147.0" layoutY="79.0" mnemonicParsing="false" text="Autor" />
-      <CheckBox fx:id="checkListEdicion" layoutX="231.0" layoutY="79.0" mnemonicParsing="false" text="Edición" />
+      <CheckBox fx:id="checkListEdicion" layoutX="231.0" layoutY="79.0" mnemonicParsing="false" text="Editor" />
       <CheckBox fx:id="checkListTema" layoutX="313.0" layoutY="79.0" mnemonicParsing="false" text="Tema" />
       <CheckBox fx:id="checkListCodigoBarras" layoutX="386.0" layoutY="79.0" mnemonicParsing="false" text="Codigo de barras" />
    </children>

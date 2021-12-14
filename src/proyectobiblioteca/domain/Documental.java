@@ -38,31 +38,31 @@ public class Documental {
         this.numCopias = numCopias;
     }
 
-    public static int getIdRecursoDocumental() {
+    public int getIdRecursoDocumental() {
         return idRecursoDocumental;
     }
 
-    public static void setIdRecursoDocumental(int idRecursoDocumental) {
+    public void setIdRecursoDocumental(int idRecursoDocumental) {
         Documental.idRecursoDocumental = idRecursoDocumental;
     }
 
-    public static String getCodigoBarras() {
+    public String getCodigoBarras() {
         return codigoBarras;
     }
 
-    public static void setCodigoBarras(String codigoBarras) {
+    public void setCodigoBarras(String codigoBarras) {
         Documental.codigoBarras = codigoBarras;
     }
 
-    public static String getAutor() {
+    public String getAutor() {
         return autor;
     }
 
-    public static void setAutor(String autor) {
+    public void setAutor(String autor) {
         Documental.autor = autor;
     }
 
-    public static String getTitulo() {
+    public String getTitulo() {
         return titulo;
     }
 
@@ -70,31 +70,31 @@ public class Documental {
         Documental.titulo = titulo;
     }
 
-    public static String getClasificacionLC() {
+    public String getClasificacionLC() {
         return clasificacionLC;
     }
 
-    public static void setClasificacionLC(String clasificacionLC) {
+    public void setClasificacionLC(String clasificacionLC) {
         Documental.clasificacionLC = clasificacionLC;
     }
 
-    public static String getDescripcion() {
+    public String getDescripcion() {
         return descripcion;
     }
 
-    public static void setDescripcion(String descripcion) {
+    public void setDescripcion(String descripcion) {
         Documental.descripcion = descripcion;
     }
 
-    public static String getEditor() {
+    public String getEditor() {
         return editor;
     }
 
-    public static void setEditor(String editor) {
+    public void setEditor(String editor) {
         Documental.editor = editor;
     }
 
-    public static String getTema() {
+    public String getTema() {
         return tema;
     }
 
@@ -102,19 +102,19 @@ public class Documental {
         Documental.tema = tema;
     }
 
-    public static String getTipoMaterial() {
+    public String getTipoMaterial() {
         return tipoMaterial;
     }
 
-    public static void setTipoMaterial(String tipoMaterial) {
+    public void setTipoMaterial(String tipoMaterial) {
         Documental.tipoMaterial = tipoMaterial;
     }
 
-    public static String getNumCopias() {
+    public String getNumCopias() {
         return numCopias;
     }
 
-    public static void setNumCopias(String numCopias) {
+    public void setNumCopias(String numCopias) {
         Documental.numCopias = numCopias;
     }
 
