@@ -110,12 +110,20 @@ public class ModificarEliminarRecursoDocumentalController implements Initializab
 
         if(valueSearch.isEmpty() && (!checkListTitulo.isSelected() && !checkListAutor.isSelected() && !checkListEditor.isSelected()
             && !checkListTema.isSelected() && !checkListCodigoBarras.isSelected())) {
+            SQLQuery = DocumentalConstants.SQL_SELECT;
             tableViewRecursoDocumental.setItems(documentalDAO.select(documentalList, SQLQuery));
         }
 
         if(!valueSearch.isEmpty() && (checkListTitulo.isSelected() || checkListAutor.isSelected() || checkListEditor.isSelected()
             || checkListTema.isSelected() || checkListCodigoBarras.isSelected())) {        
             tableViewRecursoDocumental.setItems(documentalDAO.select(documentalList, valueSearch, SQLQuery));
+            if(documentalList.isEmpty()) {
+                Alert alertInfo = new Alert(Alert.AlertType.INFORMATION);
+                alertInfo.setTitle("INFORMATION");
+                alertInfo.setHeaderText("NO RESULTS");
+                alertInfo.setContentText("The consult you make does not have any results in the database.");
+                alertInfo.showAndWait();
+            }
         } 
     }
 
@@ -127,6 +135,7 @@ public class ModificarEliminarRecursoDocumentalController implements Initializab
         this.columnTema.setCellValueFactory(new PropertyValueFactory("tema"));
         this.columnDescripcion.setCellValueFactory(new PropertyValueFactory("descripcion"));
         this.columnClasificacionLC.setCellValueFactory(new PropertyValueFactory("clasificacionLC"));
+        this.columnTipoMaterial.setCellValueFactory(new PropertyValueFactory("tipoMaterial"));
     }
 
     public void setCheckBoxEnableOrDisable(boolean titulo, boolean autor, boolean editor, boolean tema, boolean codigoBarras) {
