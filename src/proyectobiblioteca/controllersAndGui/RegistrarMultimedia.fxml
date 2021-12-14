@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="631.0" style="-fx-background-color: white;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17" fx:controller="proyectobiblioteca.controllersAndGui.RegistrarMultimediaController">
+   <children>
+      <Label layoutX="16.0" layoutY="25.0" text="Titulo:" />
+      <Label layoutX="16.0" layoutY="59.0" text="Autor:" />
+      <Label layoutX="15.0" layoutY="91.0" text="Editor:" />
+      <Label layoutX="15.0" layoutY="128.0" text="Tema (s):" />
+      <Label layoutX="15.0" layoutY="164.0" text="Descripción:" />
+      <Label layoutX="15.0" layoutY="271.0" text="Clasificación LC:" />
+      <TextField layoutX="61.0" layoutY="21.0" prefHeight="26.0" prefWidth="247.0" />
+      <TextField layoutX="61.0" layoutY="54.0" prefHeight="26.0" prefWidth="247.0" />
+      <TextField layoutX="61.0" layoutY="86.0" prefHeight="26.0" prefWidth="247.0" />
+      <TextField layoutX="75.0" layoutY="124.0" prefHeight="26.0" prefWidth="233.0" />
+      <TextArea layoutX="17.0" layoutY="188.0" prefHeight="75.0" prefWidth="293.0" />
+      <TextField layoutX="111.0" layoutY="267.0" prefHeight="26.0" prefWidth="199.0" />
+      <Label layoutX="16.0" layoutY="304.0" text="Codigo de barra:" />
+      <TextField layoutX="111.0" layoutY="300.0" prefHeight="26.0" prefWidth="199.0" />
+      <Button layoutX="22.0" layoutY="354.0" mnemonicParsing="false" text="Salir" />
+      <Button layoutX="549.0" layoutY="354.0" mnemonicParsing="false" text="Registrar" />
+      <Label layoutX="329.0" layoutY="25.0" text="Duración:" />
+      <Label layoutX="329.0" layoutY="59.0" text="Formato:" />
+      <Label layoutX="329.0" layoutY="104.0" text="Tipo de documento multimedia:" />
+      <TextField layoutX="388.0" layoutY="21.0" prefHeight="26.0" prefWidth="233.0" />
+      <TextField layoutX="388.0" layoutY="55.0" prefHeight="26.0" prefWidth="233.0" />
+      <TextField layoutX="329.0" layoutY="124.0" prefHeight="26.0" prefWidth="293.0" />
+   </children>
+</AnchorPane>
