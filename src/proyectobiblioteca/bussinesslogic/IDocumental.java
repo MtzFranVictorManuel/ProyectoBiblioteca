@@ -25,6 +25,12 @@ public interface IDocumental {
     public ObservableList<Documental> selectCodigoBarras(ObservableList<Documental> tableInfo, String codigoBarras);
 
     public boolean update(Documental documental, int idRecursoDocumental);
+    
+    public boolean updateCopia(int idRecursoDocumental);
+    
+    public Documental selectCopiaExistes(String codigoBarras, String titulo, String tipoMaterial);
 
+    public int insert(Documental documental);
+    
     public boolean delete(Documental documental);
 }
