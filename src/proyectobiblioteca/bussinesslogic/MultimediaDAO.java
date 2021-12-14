@@ -23,7 +23,7 @@ public class MultimediaDAO {
     
     private static final String INSERT_SQL_RECURSO = "insert into multimedia "
             + "(tipoMultimedia, duracion, formato, RecursoDocumental_idRecursoDocumental) values (?, ?, ?, ?);";
-    private static final String UPDATE_SQL = "";
+    private static final String UPDATE_SQL = "update multimedia set tipoMultimedia = ?, duracion = ?, formato = ? where RecursoDocumental_idRecursoDocumental = ?;";
 
     public MultimediaDAO() {
     }
@@ -43,6 +43,29 @@ public class MultimediaDAO {
             DBConnection.close(preStatement);
             if(this.connection == null){
                 DBConnection.close(connect);
+            }
+        }
+        return rows;
+    }
+    
+    public int update (Multimedia multimedia, int idRecursoDocumental){
+        connect = DBConnection.getConnection();
+        int rows = 0;
+        if(connect != null){
+            try{
+                preStatement = connect.prepareStatement(UPDATE_SQL);
+                preStatement.setString(1, multimedia.getTipoMultimedia());
+                preStatement.setTime(2, multimedia.getDuracion());
+                preStatement.setString(3, multimedia.getFormato());
+                preStatement.setInt(4, idRecursoDocumental);
+                rows = preStatement.executeUpdate();
+            }catch(SQLException excepcionSQL){
+                System.out.println("error" + excepcionSQL);
+            }finally{
+                DBConnection.close(preStatement);
+                if(this.connection == null){
+                    DBConnection.close(connect);
+                }
             }
         }
         return rows;

@@ -310,7 +310,7 @@ public class DocumentalDAO implements IDocumental {
     }
 
     @Override
-    public Documental selectCopiaExistes(String codigoBarras, String titulo, String tipoMaterial){
+    public boolean selectCopiaExistes(String codigoBarras, String titulo, String tipoMaterial){
         connect = DBConnection.getConnection();
         Documental documental = null;
         if(connect != null){
@@ -332,7 +332,7 @@ public class DocumentalDAO implements IDocumental {
                     documental.setTema(rSet.getString("tema"));
                     documental.setTipoMaterial(rSet.getString("tipoMaterial"));
                     documental.setNumCopias(rSet.getInt("numCopias"));
-                    return documental;
+                    return true;
                 }
                 
             }catch(SQLException excepcion){
@@ -344,7 +344,7 @@ public class DocumentalDAO implements IDocumental {
                 }
             }
         }
-        return documental;
+        return false;
     }    
     
     @Override
