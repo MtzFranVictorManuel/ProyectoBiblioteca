@@ -4,19 +4,24 @@
  */
 package proyectobiblioteca.controllersAndGui;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 import proyectobiblioteca.bussinesslogic.DocumentalConstants;
 import proyectobiblioteca.bussinesslogic.DocumentalDAO;
 import proyectobiblioteca.domain.Documental;
@@ -76,12 +81,14 @@ public class ModificarEliminarRecursoDocumentalController implements Initializab
 
     private String SQLQuery = "";
     private String valueSearch = ""; 
+    private String tipoMaterial = "";
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         SQLQuery = DocumentalConstants.SQL_SELECT;
+        tableViewRecursoDocumental.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         setTableView();
         tableViewRecursoDocumental.setItems(documentalDAO.select(documentalList, SQLQuery));
     }    
@@ -89,8 +96,26 @@ public class ModificarEliminarRecursoDocumentalController implements Initializab
     public void clicSalir(ActionEvent actionEvent){
         
     }
+
     public void clicEditar(ActionEvent actionEvent){
-        
+        Documental documental = new Documental();
+        documentalList = tableViewRecursoDocumental.getSelectionModel().getSelectedItems();
+        if (documentalList.isEmpty()) {
+            Alert alertInfo = new Alert(Alert.AlertType.WARNING);
+            alertInfo.setTitle("Error");
+            alertInfo.setHeaderText("No Row Selected");
+            alertInfo.setContentText("Please select a row to edit");
+            alertInfo.showAndWait();
+        } else {
+            documental = documentalList.get(0);
+            tipoMaterial = documental.getTipoMaterial();
+            if(tipoMaterial.equals("Libro")) {
+                navigationScreen("RegistrarLibro.fxml");
+            }
+            if(tipoMaterial.equals("Multimedia")) {
+                navigationScreen("RegistrarMultimedia.fxml");
+            }
+        }
     }
     public void clicEliminar(ActionEvent actionEvent){
         
@@ -125,6 +150,18 @@ public class ModificarEliminarRecursoDocumentalController implements Initializab
                 alertInfo.showAndWait();
             }
         } 
+    }
+
+    public void navigationScreen(String url) {
+        try {
+            Stage stage = (Stage) textFieldBarraBusqueda.getScene().getWindow();
+            Scene scene = new Scene(FXMLLoader.load(getClass().getResource(url)));
+            stage.setScene(scene);
+            stage.setResizable(false);
+            stage.show();
+        }catch(IOException ex) {
+            System.out.println(ex.getMessage());
+        }
     }
 
     public void setTableView() {

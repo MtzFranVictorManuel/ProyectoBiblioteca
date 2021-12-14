@@ -6,6 +6,7 @@ package proyectobiblioteca.controllersAndGui;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 
 /**
@@ -23,4 +24,11 @@ public class RegistrarMultimediaController implements Initializable {
         // TODO
     }    
     
+    public void clicSalir(ActionEvent actionEvent){
+        
+    }
+
+    public void clicRegistrar(ActionEvent actionEvent){
+        
+    }
 }
