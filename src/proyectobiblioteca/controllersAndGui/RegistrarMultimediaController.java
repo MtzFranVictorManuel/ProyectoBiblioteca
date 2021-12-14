@@ -1,13 +1,16 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
- */
 package proyectobiblioteca.controllersAndGui;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import proyectobiblioteca.bussinesslogic.DocumentalDAO;
+import proyectobiblioteca.bussinesslogic.MultimediaDAO;
+import proyectobiblioteca.domain.Documental;
+import proyectobiblioteca.domain.Multimedia;
 
 /**
  * FXML Controller class
@@ -15,20 +18,38 @@ import javafx.fxml.Initializable;
  * @author victormanuel
  */
 public class RegistrarMultimediaController implements Initializable {
-
-    /**
-     * Initializes the controller class.
-     */
+    MultimediaDAO multimedidao = new MultimediaDAO();
+    DocumentalDAO documentaldao = new DocumentalDAO();
+    Multimedia multimedia = new Multimedia();
+    Documental documento = new Documental();
+    
+    @FXML
+    private TextField textFieldTitulo, textFieldAutor, textFieldEditor, 
+            textFieldTemas, textFieldClasificacionLC,
+            textFieldDuraion, textFieldFormato, textFieldTipoDocumento, textFieldCodigoBarras;
+    
+    @FXML
+    private TextArea textFieldDescripcion;
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        
     }    
     
     public void clicSalir(ActionEvent actionEvent){
         
     }
-
+    
     public void clicRegistrar(ActionEvent actionEvent){
+        String codigoBarra = textFieldCodigoBarras.getText();
+        String tituloMultimedia = textFieldTitulo.getText();
+        String tipoMaterial = "libro";
+        if(documentaldao.selectCopiaExistes(codigoBarra, tituloMultimedia, tipoMaterial) == false){
+            System.out.println("no existe");
+        }else{
+            System.out.println("Si existe");
+        }
         
     }
+
 }

@@ -13,6 +13,9 @@ public class Multimedia {
     private String formato;
     private int fkIdRecursoDocumental;
 
+    public Multimedia() {
+    }
+    
     public Multimedia(String tipoMultimedia, Time duracion, String formato) {
         this.tipoMultimedia = tipoMultimedia;
         this.duracion = duracion;

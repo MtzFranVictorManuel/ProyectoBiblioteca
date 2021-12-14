@@ -20,7 +20,7 @@ public interface IDocumental {
     
     public boolean updateCopia(int idRecursoDocumental);
     
-    public Documental selectCopiaExistes(String codigoBarras, String titulo, String tipoMaterial);
+    public boolean selectCopiaExistes(String codigoBarras, String titulo, String tipoMaterial);
 
     public int insert(Documental documental);
     
