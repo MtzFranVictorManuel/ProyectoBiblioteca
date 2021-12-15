@@ -109,10 +109,10 @@ public class ModificarEliminarRecursoDocumentalController implements Initializab
         } else {
             documental = documentalList.get(0);
             tipoMaterial = documental.getTipoMaterial();
-            if(tipoMaterial.equals("Libro")) {
+            if(tipoMaterial.equals("libro")) {
                 navigationScreen("RegistrarLibro.fxml");
             }
-            if(tipoMaterial.equals("Multimedia")) {
+            if(tipoMaterial.equals("multimedia")) {
                 navigationScreen("RegistrarMultimedia.fxml");
             }
         }

@@ -24,6 +24,18 @@ public class Documental {
     
     }
 
+    public Documental(String codigoBarras, String autor, String titulo, String clasificacionLC, String descripcion, String editor, String tema, String tipoMaterial, int numCopias) {
+        this.codigoBarras = codigoBarras;
+        this.autor = autor;
+        this.titulo = titulo;
+        this.clasificacionLC = clasificacionLC;
+        this.descripcion = descripcion;
+        this.editor = editor;
+        this.tema = tema;
+        this.tipoMaterial = tipoMaterial;
+        this.numCopias = numCopias;
+    }
+
     public Documental(int idRecursoDocumental, String codigoBarras, String autor, String titulo, String clasificacionLC, 
         String descripcion, String editor, String tema, String tipoMaterial, int numCopias) {
         this.idRecursoDocumental = idRecursoDocumental;

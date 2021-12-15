@@ -7,6 +7,7 @@ package proyectobiblioteca.bussinesslogic;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Time;
 import proyectobiblioteca.dataaccess.DBConnection;
 import proyectobiblioteca.domain.Documental;
 import proyectobiblioteca.domain.Multimedia;
@@ -28,15 +29,16 @@ public class MultimediaDAO {
     public MultimediaDAO() {
     }
     
-    public int insert(Multimedia multimedia){
+    public int insert(String tipoMultimedia, Time duracion, String formato, int fkRecursoDocumental){
         connect = DBConnection.getConnection();
         int rows = 0;
         try{
             preStatement = connect.prepareStatement(INSERT_SQL_RECURSO);
-            preStatement.setString(1, multimedia.getTipoMultimedia());
-            preStatement.setTime(2, multimedia.getDuracion());
-            preStatement.setString(3, multimedia.getFormato());
-            preStatement.setInt(4, recursoDocumen.getIdRecursoDocumental());
+            preStatement.setString(1, tipoMultimedia);
+            preStatement.setTime(2, duracion);
+            preStatement.setString(3, formato);
+            preStatement.setInt(4, fkRecursoDocumental);
+            rows = preStatement.executeUpdate(); 
         }catch(SQLException excepcionSQL){
             System.out.println("error" + excepcionSQL);
         }finally{

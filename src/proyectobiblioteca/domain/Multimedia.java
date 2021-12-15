@@ -29,8 +29,7 @@ public class Multimedia {
         this.formato = formato;
     }
 
-    public Multimedia(int idMultimedia, String tipoMultimedia, Time duracion, String formato, int fkIdRecursoDocumental) {
-        this.idMultimedia = idMultimedia;
+    public Multimedia(String tipoMultimedia, Time duracion, String formato, int fkIdRecursoDocumental) {
         this.tipoMultimedia = tipoMultimedia;
         this.duracion = duracion;
         this.formato = formato;

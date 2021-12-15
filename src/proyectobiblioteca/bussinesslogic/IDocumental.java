@@ -22,7 +22,10 @@ public interface IDocumental {
     
     public boolean selectCopiaExistes(String codigoBarras, String titulo, String tipoMaterial);
 
-    public int insert(Documental documental);
+    public int insert(String codigoBarras, String autor, String titulo, String clasificacionLC, 
+            String descripcion, String editor, String tema, String tipoMaterial, int numCopias);
     
     public boolean delete(Documental documental);
+    
+    public int selectIdRecursoDocumental(String titulo, String codigoBarras, String autor);
 }

@@ -1,12 +1,23 @@
 package proyectobiblioteca.controllersAndGui;
 
 import java.net.URL;
+import java.sql.Time;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.input.DataFormat;
 import proyectobiblioteca.bussinesslogic.DocumentalDAO;
 import proyectobiblioteca.bussinesslogic.MultimediaDAO;
 import proyectobiblioteca.domain.Documental;
@@ -43,13 +54,40 @@ public class RegistrarMultimediaController implements Initializable {
     public void clicRegistrar(ActionEvent actionEvent){
         String codigoBarra = textFieldCodigoBarras.getText();
         String tituloMultimedia = textFieldTitulo.getText();
-        String tipoMaterial = "libro";
+        String tipoMaterial = "multimedia";
+        int idRecursoDocumental;
         if(documentaldao.selectCopiaExistes(codigoBarra, tituloMultimedia, tipoMaterial) == false){
-            System.out.println("no existe");
+            documentaldao.insert(textFieldCodigoBarras.getText(), textFieldAutor.getText(), 
+                    textFieldTitulo.getText(), textFieldClasificacionLC.getText(), 
+                    textFieldDescripcion.getText(), textFieldEditor.getText(), textFieldTemas.getText(), tipoMaterial, 0);
+            idRecursoDocumental = documentaldao.selectIdRecursoDocumental(textFieldTitulo.getText(), textFieldCodigoBarras.getText(), textFieldAutor.getText());
+            System.out.println(idRecursoDocumental);
+            if(idRecursoDocumental == 0){
+                Alert alertInfo = new Alert(Alert.AlertType.WARNING);
+                alertInfo.setTitle("Error");
+                alertInfo.setHeaderText("No se guardo el recurso documental");
+                alertInfo.setContentText("El recurso documental ingresado no fue guardado correctamente");
+                alertInfo.showAndWait();
+            }
+        multimedidao.insert(textFieldTipoDocumento.getText(), Time.valueOf(textFieldDuraion.getText()), textFieldFormato.getText(), idRecursoDocumental);            
         }else{
-            System.out.println("Si existe");
+            if(alertaConfirmacion("", "", "")== true){
+                idRecursoDocumental = documentaldao.selectIdRecursoDocumental(textFieldTitulo.getText(), textFieldCodigoBarras.getText(), textFieldAutor.getText());
+                documentaldao.updateCopia(idRecursoDocumental);
+            }
         }
         
     }
-
+    
+    public boolean alertaConfirmacion(String title, String headerText, String contentText){
+        Alert alertEmptyInfo = new Alert(Alert.AlertType.CONFIRMATION);
+        alertEmptyInfo.setTitle(title);
+        alertEmptyInfo.setHeaderText(headerText);
+        alertEmptyInfo.setContentText(contentText);
+        Optional<ButtonType> result = alertEmptyInfo.showAndWait();
+        if(result.isPresent() && result.get() == ButtonType.OK){
+            return true;
+        }
+        return false;
+    }
 }
