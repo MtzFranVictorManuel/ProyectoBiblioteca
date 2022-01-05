@@ -26,7 +26,7 @@ public class DocumentalDAO implements IDocumental {
     private static final String SQL_INSERT = "insert into recursodocumental (codigoBarras, autor, titulo, clasificacionLC, "
             + "descripcion, editor, tema, tipoMaterial, numCopias) values (?, ?, ?, ?, ?, ?, ?, ?, ?);";
     private static final String SQL_SELECT_BUSCARCOPIA = "select * from recursodocumental where codigoBarras = ? and titulo = ? and tipoMaterial = ?;";
-    private static final String SQL_UPDATE_GUARDARCOPIA = "update recursodocumental set numCopias = numCopias + 1 where idRecursoDocumental = ?;";
+    private static final String GUARDARCOPIA = "update recursodocumental set numCopias = numCopias + 1 where idRecursoDocumental = ?;";
     private static final String SQL_SELECT_idRecursoDocumental = "select idRecursoDocumental from recursoDocumental where titulo = ? and codigoBarras = ? and autor = ?;";
     
     public DocumentalDAO() {
@@ -142,8 +142,9 @@ public class DocumentalDAO implements IDocumental {
         connect = DBConnection.getConnection();
         if(connect != null){
             try{
-                preStatement = connect.prepareStatement(SQL_UPDATE_GUARDARCOPIA);
+                preStatement = connect.prepareStatement(GUARDARCOPIA);
                 preStatement.setInt(1, idRecursoDocumental);
+                return true;
             }catch(SQLException excepcion){
                 System.out.println(excepcion.getMessage());
             }finally { 
@@ -153,7 +154,7 @@ public class DocumentalDAO implements IDocumental {
                 }
             }
         }
-        return true;   
+        return false;   
     }
 
     @Override

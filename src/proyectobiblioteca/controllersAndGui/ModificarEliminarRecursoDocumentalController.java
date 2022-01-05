@@ -55,6 +55,9 @@ public class ModificarEliminarRecursoDocumentalController implements Initializab
 
     @FXML
     private TableColumn columnTipoMaterial;
+    
+    @FXML
+    private TableColumn columnNumeroCopias;
 
     @FXML
     private TableView<Documental> tableViewRecursoDocumental;
@@ -177,6 +180,7 @@ public class ModificarEliminarRecursoDocumentalController implements Initializab
         this.columnDescripcion.setCellValueFactory(new PropertyValueFactory("descripcion"));
         this.columnClasificacionLC.setCellValueFactory(new PropertyValueFactory("clasificacionLC"));
         this.columnTipoMaterial.setCellValueFactory(new PropertyValueFactory("tipoMaterial"));
+        this.columnNumeroCopias.setCellValueFactory(new PropertyValueFactory("numCopias"));
     }
 
     public void setCheckBoxEnableOrDisable(boolean titulo, boolean autor, boolean editor, boolean tema, boolean codigoBarras) {

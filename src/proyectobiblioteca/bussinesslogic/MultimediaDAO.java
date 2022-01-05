@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package proyectobiblioteca.bussinesslogic;
 
 import java.sql.Connection;
@@ -9,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Time;
 import proyectobiblioteca.dataaccess.DBConnection;
-import proyectobiblioteca.domain.Documental;
 import proyectobiblioteca.domain.Multimedia;
 
 /**
@@ -20,7 +15,6 @@ public class MultimediaDAO {
     private Connection connection;
     Connection connect = null;
     PreparedStatement preStatement = null;
-    Documental recursoDocumen = new Documental();
     
     private static final String INSERT_SQL_RECURSO = "insert into multimedia "
             + "(tipoMultimedia, duracion, formato, RecursoDocumental_idRecursoDocumental) values (?, ?, ?, ?);";

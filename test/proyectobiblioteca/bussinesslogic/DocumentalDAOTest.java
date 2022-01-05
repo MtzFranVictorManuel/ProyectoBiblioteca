@@ -93,13 +93,15 @@ public class DocumentalDAOTest {
     @Test
     public void testUpdateCopia() {
         System.out.println("updateCopia");
-        int idRecursoDocumental = 0;
+        int idRecursoDocumental = 9;
         DocumentalDAO instance = new DocumentalDAO();
         boolean expResult = false;
         boolean result = instance.updateCopia(idRecursoDocumental);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        if(result == false){
+            fail("mal");
+        }else{
+            System.out.println("good");
+        }
     }
 
     /**

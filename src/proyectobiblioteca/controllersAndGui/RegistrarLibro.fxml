@@ -20,9 +20,9 @@
       <TextField fx:id="textFieldEditor" layoutX="76.0" layoutY="103.0" prefHeight="26.0" prefWidth="247.0" />
       <TextField fx:id="textFieldTemas" layoutX="90.0" layoutY="141.0" prefHeight="26.0" prefWidth="233.0" />
       <TextArea fx:id="textFieldDescripcion" layoutX="32.0" layoutY="205.0" prefHeight="75.0" prefWidth="293.0" />
-      <TextField fx:id="textFieldClasificacion" layoutX="126.0" layoutY="284.0" prefHeight="26.0" prefWidth="199.0" />
+      <TextField fx:id="textFieldClasificacionLC" layoutX="126.0" layoutY="284.0" prefHeight="26.0" prefWidth="199.0" />
       <Label layoutX="31.0" layoutY="321.0" text="Codigo de barra:" />
-      <TextField fx:id="textFieldCondigoBarras" layoutX="126.0" layoutY="317.0" prefHeight="26.0" prefWidth="199.0" />
+      <TextField fx:id="textFieldCodigoBarras" layoutX="126.0" layoutY="317.0" prefHeight="26.0" prefWidth="199.0" />
       <Button layoutX="35.0" layoutY="423.0" mnemonicParsing="false" onAction="#clicSalir" text="Salir" />
       <Button layoutX="571.0" layoutY="423.0" mnemonicParsing="false" onAction="#clicRegistrar" text="Registrar" />
       <Label layoutX="344.0" layoutY="43.0" text="ISBN:" />

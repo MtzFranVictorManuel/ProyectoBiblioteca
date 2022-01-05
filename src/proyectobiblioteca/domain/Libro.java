@@ -17,6 +17,9 @@ public class Libro {
     private String tipoObraLiteraria;
     private int fkIdRecursoDocumental;
 
+    public Libro() {
+    }
+    
     public Libro(String edicion, String isbn, Date fechaPublicacion, String idioma, String serie, int volumen, String tipoObraLiteraria) {
         this.edicion = edicion;
         this.isbn = isbn;

@@ -5,8 +5,9 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="631.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="proyectobiblioteca.controllersAndGui.RegistrarMultimediaController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="631.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="proyectobiblioteca.controllersAndGui.RegistrarMultimediaController">
    <children>
       <Label layoutX="16.0" layoutY="25.0" text="Titulo:" />
       <Label layoutX="16.0" layoutY="59.0" text="Autor:" />
@@ -25,10 +26,15 @@
       <Button layoutX="22.0" layoutY="354.0" mnemonicParsing="false" onAction="#clicSalir" text="Salir" />
       <Button layoutX="549.0" layoutY="354.0" mnemonicParsing="false" onAction="#clicRegistrar" text="Registrar" />
       <Label layoutX="329.0" layoutY="25.0" text="Duración:" />
-      <Label layoutX="329.0" layoutY="59.0" text="Formato:" />
-      <Label layoutX="329.0" layoutY="104.0" text="Tipo de documento multimedia:" />
-      <TextField fx:id="textFieldDuraion" layoutX="388.0" layoutY="21.0" prefHeight="26.0" prefWidth="233.0" />
-      <TextField fx:id="textFieldFormato" layoutX="388.0" layoutY="55.0" prefHeight="26.0" prefWidth="233.0" />
-      <TextField fx:id="textFieldTipoDocumento" layoutX="329.0" layoutY="124.0" prefHeight="26.0" prefWidth="293.0" />
+      <Label layoutX="331.0" layoutY="91.0" text="Formato:" />
+      <Label layoutX="329.0" layoutY="128.0" text="Tipo de documento multimedia:" />
+      <TextField fx:id="textFieldDuraionHora" alignment="CENTER" layoutX="363.0" layoutY="46.0" onKeyTyped="#maximoTiempo" prefHeight="26.0" prefWidth="41.0" promptText="00" />
+      <TextField fx:id="textFieldFormato" layoutX="384.0" layoutY="86.0" prefHeight="26.0" prefWidth="233.0" />
+      <TextField fx:id="textFieldTipoDocumento" layoutX="329.0" layoutY="151.0" prefHeight="26.0" prefWidth="293.0" />
+      <Text layoutX="329.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hora:" />
+      <Text layoutX="415.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Min:" />
+      <TextField fx:id="textFieldDuraionMinutos" alignment="CENTER" layoutX="445.0" layoutY="47.0" onKeyTyped="#maximoTiempo" prefHeight="26.0" prefWidth="41.0" promptText="00" />
+      <Text layoutX="501.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Seg:" />
+      <TextField fx:id="textFieldDuraionSegundos" alignment="CENTER" layoutX="535.0" layoutY="48.0" onKeyTyped="#maximoTiempo" prefHeight="26.0" prefWidth="41.0" promptText="00" />
    </children>
 </AnchorPane>
