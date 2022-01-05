@@ -124,7 +124,8 @@ public class RegistrarMultimediaController implements Initializable {
                 multimedidao.insert(textFieldTipoDocumento.getText(), Time.valueOf(duracion), textFieldFormato.getText(), idRecursoDocumental);         
                 limpiarCampos();
             }else{
-                if(alertaConfirmacion("Copias", "", "")== true){
+                if(alertaConfirmacion("Copia", "Recurso documetal existente", 
+                        "El recurso documental ingresado ya existe en el sistema, ¿Desea guardarlo como copia?")== true){
                     idRecursoDocumental = documentaldao.selectIdRecursoDocumental(textFieldTitulo.getText(), textFieldCodigoBarras.getText(), textFieldAutor.getText());
                     documentaldao.updateCopia(idRecursoDocumental);
                     limpiarCampos();

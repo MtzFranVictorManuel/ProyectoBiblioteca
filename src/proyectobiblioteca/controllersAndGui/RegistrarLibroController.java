@@ -3,11 +3,15 @@ package proyectobiblioteca.controllersAndGui;
 import java.net.URL;
 import java.sql.Date;
 import static java.time.temporal.TemporalQueries.zone;
+import java.util.Optional;
 import java.util.ResourceBundle;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -119,10 +123,47 @@ public class RegistrarLibroController implements Initializable {
                     libroNuevo.setTipoObraLiteraria(textFieldTipoObra.getText());
                     librodao.insertar(libroNuevo, idRecursoDocumental);
                     limpiarCampos();
+                }else{
+                    if(alertaConfirmacion("Copia", "Recurso documental existente", 
+                            "El recurso documental ingresado ya existe en el sistema, ¿Desea guardarlo como copia?")== true){
+                        idRecursoDocumental = documentaldao.selectIdRecursoDocumental(textFieldTitulo.getText(), textFieldCodigoBarras.getText(), textFieldAutor.getText());
+                        documentaldao.updateCopia(idRecursoDocumental);
+                        limpiarCampos();
+                    }
                 }
             }
     }   
     
+    public void formatoNumerico(){
+        textFieldCodigoBarras.textProperty().addListener(new ChangeListener<String>(){
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                 if(!newValue.matches("\\d*")){
+                     textFieldCodigoBarras.setText(newValue.replaceAll("[^\\d]", ""));
+                 }               
+            }               
+        });
+        textFieldVolumen.textProperty().addListener(new ChangeListener<String>(){
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                 if(!newValue.matches("\\d*")){
+                     textFieldVolumen.setText(newValue.replaceAll("[^\\d]", ""));
+                 }               
+            }               
+        });
+    }
+    
+    public boolean alertaConfirmacion(String title, String headerText, String contentText){
+        Alert alertEmptyInfo = new Alert(Alert.AlertType.CONFIRMATION);
+        alertEmptyInfo.setTitle(title);
+        alertEmptyInfo.setHeaderText(headerText);
+        alertEmptyInfo.setContentText(contentText);
+        Optional<ButtonType> result = alertEmptyInfo.showAndWait();
+        if(result.isPresent() && result.get() == ButtonType.OK){
+            return true;
+        }
+        return false;
+    }
     
     public boolean datosErroneso(boolean validar){
         while(validar == true){

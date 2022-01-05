@@ -34,7 +34,8 @@ public class LibroDAO {
             preStatement.setInt(6, libro.getVolumen());
             preStatement.setString(7, libro.getTipoObraLiteraria());
             preStatement.setInt(8, fkDocumentoID);
-            return registroExitoso = true;
+            preStatement.executeUpdate();
+            registroExitoso = true;
         }catch(SQLException excepcionSQL){
             System.out.println("error" + excepcionSQL);
         }finally{
@@ -44,31 +45,5 @@ public class LibroDAO {
             }
         }
         return registroExitoso;
-    }
-    
-     public int insertar2 (String edicion, String isbn, Date fechaPublicacion, String idioma, 
-             String serie, int volumen, String tipoObra, int fkDocumentoID){
-        connect = DBConnection.getConnection();
-        int rows = 0;
-        try{
-            preStatement = connect.prepareStatement(INSERT_SQL_LIBRO);
-            preStatement.setString(1, edicion);
-            preStatement.setString(2, isbn);
-            preStatement.setDate(3, fechaPublicacion);
-            preStatement.setString(4, idioma);
-            preStatement.setString(5, serie);
-            preStatement.setInt(6, volumen);
-            preStatement.setString(7, tipoObra);
-            preStatement.setInt(8, fkDocumentoID);
-            rows = preStatement.executeUpdate();
-        }catch(SQLException excepcionSQL){
-            System.out.println("error" + excepcionSQL);
-        }finally{
-            DBConnection.close(preStatement);
-            if(this.connection == null){
-                DBConnection.close(connect);
-            }
-        }
-        return rows;
     }
 }

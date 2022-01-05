@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/UnitTests/JUnit4TestClass.java to edit this template
- */
 package proyectobiblioteca.bussinesslogic;
 
 import java.sql.Date;
@@ -53,7 +49,7 @@ public class LibroDAOTest {
         String serie = "ninguna";
         String tipoObraLiteraria = "ninguna";
         Libro libro = new Libro(edicion, isbn, fechaPublicacion, idioma, serie, 0, tipoObraLiteraria);
-        int fkDocumentoID = 1;
+        int fkDocumentoID = 19;
         LibroDAO instance = new LibroDAO();
         boolean expResult = false;
         boolean result = instance.insertar(libro, fkDocumentoID);
@@ -62,30 +58,5 @@ public class LibroDAOTest {
         }else{
             System.err.println("Bueno");
         }
-    }
-
-    /**
-     * Test of insertar2 method, of class LibroDAO.
-     */
-    @Test
-    public void testInsertar2() {
-        System.out.println("insertar2");
-        String edicion = "Nuevo";
-        String isbn = "n";
-        Date fechaPublicacion = Date.valueOf(LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
-        String idioma = "n";
-        String serie = "n";
-        int volumen = 0;
-        String tipoObra = "n";
-        int fkDocumentoID = 1;
-        LibroDAO instance = new LibroDAO();
-        int expResult = 0;
-        int result = instance.insertar2(edicion, isbn, fechaPublicacion, idioma, serie, volumen, tipoObra, fkDocumentoID);
-        if(result == expResult){
-            fail("Error de ingresar");
-        }else{
-            System.err.println("Bueno");
-        }
-    }
-    
+    }  
 }
