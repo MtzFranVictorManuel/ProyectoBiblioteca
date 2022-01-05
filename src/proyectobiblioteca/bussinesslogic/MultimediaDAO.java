@@ -23,6 +23,7 @@ public class MultimediaDAO {
     public MultimediaDAO() {
     }
     
+    
     public int insert(String tipoMultimedia, Time duracion, String formato, int fkRecursoDocumental){
         connect = DBConnection.getConnection();
         int rows = 0;
