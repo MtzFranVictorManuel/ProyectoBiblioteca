@@ -74,7 +74,7 @@ public class RegistrarLibroController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        formatoNumerico();
     }
         
     public void clicSalir(ActionEvent actionEvent){

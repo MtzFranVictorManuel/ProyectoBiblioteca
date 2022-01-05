@@ -7,7 +7,7 @@ import java.sql.Time;
  * @author victormanuel
  */
 public class Multimedia {
-    private int idMultimedia;
+    private static int idMultimedia;
     private String tipoMultimedia;
     private Time duracion;
     private String formato;
