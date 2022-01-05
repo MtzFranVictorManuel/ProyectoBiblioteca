@@ -140,11 +140,13 @@ public class DocumentalDAO implements IDocumental {
     @Override
     public boolean updateCopia(int idRecursoDocumental){
         connect = DBConnection.getConnection();
+        boolean validar = false;
         if(connect != null){
             try{
                 preStatement = connect.prepareStatement(GUARDARCOPIA);
                 preStatement.setInt(1, idRecursoDocumental);
-                return true;
+                preStatement.executeUpdate();
+                validar = true;
             }catch(SQLException excepcion){
                 System.out.println(excepcion.getMessage());
             }finally { 

@@ -81,9 +81,7 @@ public class RegistrarLibroController implements Initializable {
             String codigoBarra = textFieldCodigoBarras.getText();
             String tituloLibro = textFieldTitulo.getText();
             String tipoMaterial = "libro";
-            int volumenLibro = Integer.parseInt(textFieldVolumen.getText());
             int idRecursoDocumental;
-            Date fechaPublicacion = Date.valueOf(datePickerFechaPublicacion.getValue()); 
             if(textFieldAutor.getText().isEmpty() || textFieldClasificacionLC.getText().isEmpty()
                     || textFieldCodigoBarras.getText().isEmpty() || textFieldDescripcion.getText().isEmpty()
                     || textFieldEdicion.getText().isEmpty() || textFieldEditor.getText().isEmpty() || textFieldIdioma.getText().isEmpty()
@@ -97,6 +95,7 @@ public class RegistrarLibroController implements Initializable {
                 alertInfo.setContentText("Los datos ingresados son vacions, por favor de validar que los datos sean correctos.");
                 alertInfo.showAndWait();
             }else{
+                Date fechaPublicacion = Date.valueOf(datePickerFechaPublicacion.getValue()); 
                 datosCorrectos(true);
                 if(documentaldao.selectCopiaExistes(codigoBarra, tituloLibro, tipoMaterial) == false){
                     documentaldao.insert(codigoBarra, textFieldAutor.getText(), tituloLibro, textFieldClasificacionLC.getText(), 
@@ -109,6 +108,7 @@ public class RegistrarLibroController implements Initializable {
                         alertInfo.setContentText("El recurso documental ingresado no fue guardado correctamente");
                         alertInfo.showAndWait();
                     }
+                    int volumenLibro = Integer.parseInt(textFieldVolumen.getText());
                     Libro libroNuevo = new Libro();
                     libroNuevo.setEdicion(textFieldEdicion.getText());
                     libroNuevo.setIsbn(textFieldIsbn.getText());

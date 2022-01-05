@@ -97,10 +97,10 @@ public class RegistrarMultimediaController implements Initializable {
         String duracion = textFieldDuraionHora.getText() + ":" + 
                 textFieldDuraionMinutos.getText() + ":" + textFieldDuraionSegundos.getText();
         int idRecursoDocumental;
-        if(textFieldAutor.getText().isEmpty() || textFieldClasificacionLC.getText().isEmpty() || textFieldCodigoBarras.getText().isEmpty() ||
-                textFieldDescripcion.getText().isEmpty() || textFieldDuraionHora.getText().isEmpty() || textFieldDuraionMinutos.getText().isEmpty()
-                || textFieldDuraionSegundos.getText().isEmpty() || textFieldEditor.getText().isEmpty() || textFieldFormato.getText().isEmpty() ||
-                textFieldTemas.getText().isEmpty() || textFieldTipoDocumento.getText().isEmpty() || textFieldTitulo.getText().isEmpty()){
+        if(textFieldAutor.getText().isEmpty() || textFieldClasificacionLC.getText().isEmpty() || textFieldCodigoBarras.getText().isEmpty() 
+                || textFieldDescripcion.getText().isEmpty() || textFieldDuraionHora.getText().isEmpty() || textFieldDuraionMinutos.getText().isEmpty()
+                || textFieldDuraionSegundos.getText().isEmpty() || textFieldDuraionSegundos.getText().equals("00") || textFieldEditor.getText().isEmpty() 
+                || textFieldFormato.getText().isEmpty() || textFieldTemas.getText().isEmpty() || textFieldTipoDocumento.getText().isEmpty() || textFieldTitulo.getText().isEmpty()){
             datosCorrectos(true);
             datosErroenes(true);
             Alert alertInfo = new Alert(Alert.AlertType.ERROR);
@@ -114,7 +114,6 @@ public class RegistrarMultimediaController implements Initializable {
                         textFieldTitulo.getText(), textFieldClasificacionLC.getText(), 
                         textFieldDescripcion.getText(), textFieldEditor.getText(), textFieldTemas.getText(), tipoMaterial, 1);
                 idRecursoDocumental = documentaldao.selectIdRecursoDocumental(textFieldTitulo.getText(), textFieldCodigoBarras.getText(), textFieldAutor.getText());
-                limpiarCampos();
                 if(idRecursoDocumental == 0){
                     Alert alertInfo = new Alert(Alert.AlertType.WARNING);
                     alertInfo.setTitle("Error");
@@ -122,7 +121,8 @@ public class RegistrarMultimediaController implements Initializable {
                     alertInfo.setContentText("El recurso documental ingresado no fue guardado correctamente");
                     alertInfo.showAndWait();
                 }
-                multimedidao.insert(textFieldTipoDocumento.getText(), Time.valueOf(duracion), textFieldFormato.getText(), idRecursoDocumental);            
+                multimedidao.insert(textFieldTipoDocumento.getText(), Time.valueOf(duracion), textFieldFormato.getText(), idRecursoDocumental);         
+                limpiarCampos();
             }else{
                 if(alertaConfirmacion("Copias", "", "")== true){
                     idRecursoDocumental = documentaldao.selectIdRecursoDocumental(textFieldTitulo.getText(), textFieldCodigoBarras.getText(), textFieldAutor.getText());

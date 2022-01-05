@@ -93,7 +93,7 @@ public class DocumentalDAOTest {
     @Test
     public void testUpdateCopia() {
         System.out.println("updateCopia");
-        int idRecursoDocumental = 9;
+        int idRecursoDocumental = 5;
         DocumentalDAO instance = new DocumentalDAO();
         boolean expResult = false;
         boolean result = instance.updateCopia(idRecursoDocumental);

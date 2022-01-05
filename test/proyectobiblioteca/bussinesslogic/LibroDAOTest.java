@@ -53,7 +53,7 @@ public class LibroDAOTest {
         String serie = "ninguna";
         String tipoObraLiteraria = "ninguna";
         Libro libro = new Libro(edicion, isbn, fechaPublicacion, idioma, serie, 0, tipoObraLiteraria);
-        int fkDocumentoID = 13;
+        int fkDocumentoID = 1;
         LibroDAO instance = new LibroDAO();
         boolean expResult = false;
         boolean result = instance.insertar(libro, fkDocumentoID);
@@ -77,14 +77,14 @@ public class LibroDAOTest {
         String serie = "n";
         int volumen = 0;
         String tipoObra = "n";
-        int fkDocumentoID = 13;
+        int fkDocumentoID = 1;
         LibroDAO instance = new LibroDAO();
-        boolean expResult = false;
-        boolean result = instance.insertar2(edicion, isbn, fechaPublicacion, idioma, serie, volumen, tipoObra, fkDocumentoID);
+        int expResult = 0;
+        int result = instance.insertar2(edicion, isbn, fechaPublicacion, idioma, serie, volumen, tipoObra, fkDocumentoID);
         if(result == expResult){
             fail("Error de ingresar");
         }else{
-            System.err.println("Bueno" + fechaPublicacion.toString());
+            System.err.println("Bueno");
         }
     }
     
