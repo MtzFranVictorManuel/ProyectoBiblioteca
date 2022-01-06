@@ -7,7 +7,7 @@ import java.sql.Date;
  * @author victormanuel
  */
 public class Libro {
-    private static int idLibro;
+    private int idLibro;
     private String edicion;
     private String isbn;
     private Date fechaPublicacion;

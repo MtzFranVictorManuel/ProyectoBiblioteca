@@ -251,29 +251,29 @@ public class RegistrarMultimediaController implements Initializable {
     public boolean datosCorrectos(boolean validar){
         while(validar == true){
             if(!textFieldAutor.getText().isEmpty()){
-                textFieldAutor.setStyle("-fx-border-color: off;");
+                textFieldAutor.setStyle("-fx-border-color: null;");
             }if(!textFieldClasificacionLC.getText().isEmpty()){
-                textFieldClasificacionLC.setStyle("-fx-border-color: off;");
+                textFieldClasificacionLC.setStyle("-fx-border-color: null;");
             }if(!textFieldCodigoBarras.getText().isEmpty()){
-                textFieldCodigoBarras.setStyle("-fx-border-color: off;");
+                textFieldCodigoBarras.setStyle("-fx-border-color: null;");
             }if(!textFieldDescripcion.getText().isEmpty()){
-                textFieldDescripcion.setStyle("-fx-border-color: off;");
+                textFieldDescripcion.setStyle("-fx-border-color: null;");
             }if(!textFieldDuraionHora.getText().equals("00") || textFieldDuraionHora.getText().isEmpty()){
-                textFieldDuraionHora.setStyle("-fx-border-color: off;");
+                textFieldDuraionHora.setStyle("-fx-border-color: null;");
             }if(!textFieldDuraionMinutos.getText().equals("00") || textFieldDuraionMinutos.getText().isEmpty()){
-                textFieldDuraionMinutos.setStyle("-fx-border-color: off;");
+                textFieldDuraionMinutos.setStyle("-fx-border-color: null;");
             }if(!textFieldDuraionSegundos.getText().equals("00") || textFieldDuraionSegundos.getText().isEmpty()){
-                textFieldDuraionSegundos.setStyle("-fx-border-color: off;");
+                textFieldDuraionSegundos.setStyle("-fx-border-color: null;");
             }if(!textFieldEditor.getText().isEmpty()){
-                textFieldEditor.setStyle("-fx-border-color: off;");
+                textFieldEditor.setStyle("-fx-border-color: null;");
             }if(!textFieldFormato.getText().isEmpty()){
-                textFieldFormato.setStyle("-fx-border-color: off;");
+                textFieldFormato.setStyle("-fx-border-color: null;");
             }if(!textFieldTemas.getText().isEmpty()){
-                textFieldTemas.setStyle("-fx-border-color: off;");
+                textFieldTemas.setStyle("-fx-border-color: null;");
             }if(!textFieldTipoDocumento.getText().isEmpty()){
-                textFieldTipoDocumento.setStyle("-fx-border-color: off;");
+                textFieldTipoDocumento.setStyle("-fx-border-color: null;");
             }if(!textFieldTitulo.getText().isEmpty()){
-                textFieldTitulo.setStyle("-fx-border-color: off;");
+                textFieldTitulo.setStyle("-fx-border-color: null;");
             }
             return validar = true;
         }

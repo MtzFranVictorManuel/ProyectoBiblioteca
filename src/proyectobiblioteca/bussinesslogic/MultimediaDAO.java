@@ -2,6 +2,7 @@ package proyectobiblioteca.bussinesslogic;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Time;
 import proyectobiblioteca.dataaccess.DBConnection;
@@ -19,6 +20,7 @@ public class MultimediaDAO {
     private static final String INSERT_SQL_RECURSO = "insert into multimedia "
             + "(tipoMultimedia, duracion, formato, RecursoDocumental_idRecursoDocumental) values (?, ?, ?, ?);";
     private static final String UPDATE_SQL = "update multimedia set tipoMultimedia = ?, duracion = ?, formato = ? where RecursoDocumental_idRecursoDocumental = ?;";
+    private static final String SQL_SELECT_MULTIMEDIA = "select * from multimedia where RecursoDocumental_idRecursoDocumental = ?;";
 
     public MultimediaDAO() {
     }
@@ -66,6 +68,33 @@ public class MultimediaDAO {
             }
         }
         return rows;
+    }
+    
+    public Multimedia seleccionarLibro (int idRecursoDocumental){
+        connect = DBConnection.getConnection();
+        Multimedia multimedia = null;
+        if(connect != null){
+            try{
+                preStatement = connect.prepareStatement(SQL_SELECT_MULTIMEDIA);
+                preStatement.setInt(1, idRecursoDocumental);
+                ResultSet rSet = preStatement.executeQuery();
+                if(rSet.next()){
+                    multimedia = new Multimedia();
+                    multimedia.setTipoMultimedia(rSet.getString("tipoMultimedia"));
+                    multimedia.setDuracion(rSet.getTime("duracion"));
+                    multimedia.setFormato(rSet.getString("formato"));          
+                    return multimedia;
+                }
+            }catch(SQLException excepcion){
+                System.out.println(excepcion.getMessage());
+            }finally { 
+                DBConnection.close(preStatement);
+                if (this.connection == null) {
+                    DBConnection.close(connect);
+                }
+            }
+        }
+        return multimedia;
     }
    
 }

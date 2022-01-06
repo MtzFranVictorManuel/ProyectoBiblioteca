@@ -16,7 +16,7 @@ import java.sql.SQLException;
  */
 public class DBConnection {
     private static final String JDBC_USER="root";
-    private static final String JDBC_DATABASE="basebiblioteca";
+    private static final String JDBC_DATABASE="mydb";
     private static final String JDBC_PASSWORD="Man159753";
     private static final String JDBC_URL = "jdbc:mysql://localhost/ "+ JDBC_DATABASE +"?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
     
@@ -26,7 +26,7 @@ public class DBConnection {
             Class.forName("com.mysql.cj.jdbc.Driver");
             connect = DriverManager.getConnection(JDBC_URL, JDBC_USER, JDBC_PASSWORD);
         } catch (ClassNotFoundException excep) {
-            System.out.println("Error de conexion " + excep.getMessage());
+            System.out.println("Error de conexion:  " + excep.getMessage());
         } catch (SQLException excep) {
             System.out.println("Error de conexion " + excep.getMessage());
         }

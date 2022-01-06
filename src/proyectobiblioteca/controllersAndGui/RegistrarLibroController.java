@@ -74,7 +74,7 @@ public class RegistrarLibroController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        formatoNumerico();
+        formatoTextFields();
     }
         
     public void clicSalir(ActionEvent actionEvent){
@@ -82,60 +82,61 @@ public class RegistrarLibroController implements Initializable {
     }
     
     public void clicRegistrar(ActionEvent actionEvent){       
+        try{
             String codigoBarra = textFieldCodigoBarras.getText();
             String tituloLibro = textFieldTitulo.getText();
             String tipoMaterial = "libro";
             int idRecursoDocumental;
-            if(textFieldAutor.getText().isEmpty() || textFieldClasificacionLC.getText().isEmpty()
-                    || textFieldCodigoBarras.getText().isEmpty() || textFieldDescripcion.getText().isEmpty()
-                    || textFieldEdicion.getText().isEmpty() || textFieldEditor.getText().isEmpty() || textFieldIdioma.getText().isEmpty()
-                    || textFieldIsbn.getText().isEmpty() || textFieldSerie.getText().isEmpty() || textFieldTemas.getText().isEmpty() 
-                    || textFieldTipoObra.getText().isEmpty() || textFieldTitulo.getText().isEmpty() || textFieldVolumen.getText().isEmpty()
-                    || datePickerFechaPublicacion.getValue() == null){
-                datosCorrectos(true);
-                datosErroneso(true);
-                Alert alertInfo = new Alert(Alert.AlertType.ERROR);
-                alertInfo.setTitle("Datos vacíos");
-                alertInfo.setContentText("Los datos ingresados son vacions, por favor de validar que los datos sean correctos.");
-                alertInfo.showAndWait();
+            Date fechaPublicacion = Date.valueOf(datePickerFechaPublicacion.getValue()); 
+            datosCorrectos(true);
+            if(documentaldao.selectCopiaExistes(codigoBarra, tituloLibro, tipoMaterial) == false){
+                documentaldao.insert(codigoBarra, textFieldAutor.getText(), tituloLibro, textFieldClasificacionLC.getText(), 
+                        textFieldDescripcion.getText(), textFieldEditor.getText(), textFieldTemas.getText(), tipoMaterial, 1);
+                idRecursoDocumental = documentaldao.selectIdRecursoDocumental(tituloLibro, codigoBarra, textFieldAutor.getText());
+                if(idRecursoDocumental == 0){
+                    Alert alertInfo = new Alert(Alert.AlertType.WARNING);
+                    alertInfo.setTitle("Error");
+                    alertInfo.setHeaderText("No se guardo el recurso documental");
+                    alertInfo.setContentText("El recurso documental ingresado no fue guardado correctamente");
+                    alertInfo.showAndWait();
+                }
+                int volumenLibro = Integer.parseInt(textFieldVolumen.getText());
+                Libro libroNuevo = new Libro();
+                libroNuevo.setEdicion(textFieldEdicion.getText());
+                libroNuevo.setIsbn(textFieldIsbn.getText());
+                libroNuevo.setFechaPublicacion(fechaPublicacion);
+                libroNuevo.setIdioma(textFieldIdioma.getText());
+                libroNuevo.setSerie(textFieldSerie.getText());
+                libroNuevo.setVolumen(volumenLibro);
+                libroNuevo.setTipoObraLiteraria(textFieldTipoObra.getText());
+                librodao.insertar(libroNuevo, idRecursoDocumental);
+                limpiarCampos();
             }else{
-                Date fechaPublicacion = Date.valueOf(datePickerFechaPublicacion.getValue()); 
-
-                datosCorrectos(true);
-                if(documentaldao.selectCopiaExistes(codigoBarra, tituloLibro, tipoMaterial) == false){
-                    documentaldao.insert(codigoBarra, textFieldAutor.getText(), tituloLibro, textFieldClasificacionLC.getText(), 
-                            textFieldDescripcion.getText(), textFieldEditor.getText(), textFieldTemas.getText(), tipoMaterial, 1);
-                    idRecursoDocumental = documentaldao.selectIdRecursoDocumental(tituloLibro, codigoBarra, textFieldAutor.getText());
-                    if(idRecursoDocumental == 0){
-                        Alert alertInfo = new Alert(Alert.AlertType.WARNING);
-                        alertInfo.setTitle("Error");
-                        alertInfo.setHeaderText("No se guardo el recurso documental");
-                        alertInfo.setContentText("El recurso documental ingresado no fue guardado correctamente");
-                        alertInfo.showAndWait();
-                    }
-                    int volumenLibro = Integer.parseInt(textFieldVolumen.getText());
-                    Libro libroNuevo = new Libro();
-                    libroNuevo.setEdicion(textFieldEdicion.getText());
-                    libroNuevo.setIsbn(textFieldIsbn.getText());
-                    libroNuevo.setFechaPublicacion(fechaPublicacion);
-                    libroNuevo.setIdioma(textFieldIdioma.getText());
-                    libroNuevo.setSerie(textFieldSerie.getText());
-                    libroNuevo.setVolumen(volumenLibro);
-                    libroNuevo.setTipoObraLiteraria(textFieldTipoObra.getText());
-                    librodao.insertar(libroNuevo, idRecursoDocumental);
+                if(alertaConfirmacion("Copia", "Recurso documental existente", 
+                        "El recurso documental ingresado ya existe en el sistema, ¿Desea guardarlo como copia?")== true){
+                    idRecursoDocumental = documentaldao.selectIdRecursoDocumental(textFieldTitulo.getText(), textFieldCodigoBarras.getText(), textFieldAutor.getText());
+                    documentaldao.updateCopia(idRecursoDocumental);
                     limpiarCampos();
-                }else{
-                    if(alertaConfirmacion("Copia", "Recurso documental existente", 
-                            "El recurso documental ingresado ya existe en el sistema, ¿Desea guardarlo como copia?")== true){
-                        idRecursoDocumental = documentaldao.selectIdRecursoDocumental(textFieldTitulo.getText(), textFieldCodigoBarras.getText(), textFieldAutor.getText());
-                        documentaldao.updateCopia(idRecursoDocumental);
-                        limpiarCampos();
-                    }
                 }
             }
+        }catch(NullPointerException ex){
+            datosCorrectos(true);
+                    datosErroneso(true);
+                    Alert alertInfo = new Alert(Alert.AlertType.ERROR);
+                    alertInfo.setTitle("Datos vacíos");
+                    alertInfo.setContentText("Los datos ingresados son vacions, por favor de validar que los datos sean correctos.");
+                    alertInfo.showAndWait();
+        }catch(NumberFormatException exNum){
+            datosCorrectos(true);
+                    datosErroneso(true);
+                    Alert alertInfo = new Alert(Alert.AlertType.ERROR);
+                    alertInfo.setTitle("Datos vacíos");
+                    alertInfo.setContentText("Los datos ingresados son vacions, por favor de validar que los datos sean correctos.");
+                    alertInfo.showAndWait();
+        }          
     }   
     
-    public void formatoNumerico(){
+    public void formatoTextFields(){
         textFieldCodigoBarras.textProperty().addListener(new ChangeListener<String>(){
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
@@ -149,6 +150,14 @@ public class RegistrarLibroController implements Initializable {
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
                  if(!newValue.matches("\\d*")){
                      textFieldVolumen.setText(newValue.replaceAll("[^\\d]", ""));
+                 }               
+            }               
+        });
+        textFieldIdioma.textProperty().addListener(new ChangeListener<String>(){
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                 if(!newValue.matches("\\sa-zA-Z*")){
+                     textFieldVolumen.setText(newValue.replaceAll("[^\\sa-zA-Z]", ""));
                  }               
             }               
         });
@@ -205,33 +214,33 @@ public class RegistrarLibroController implements Initializable {
     public boolean datosCorrectos(boolean validar){
         while(validar == true){
             if(!textFieldAutor.getText().isEmpty()){
-                textFieldAutor.setStyle("-fx-border-color: off;");
+                textFieldAutor.setStyle("-fx-border-color: null;");
             }if(!textFieldClasificacionLC.getText().isEmpty()){
-                textFieldClasificacionLC.setStyle("-fx-border-color: off;");
+                textFieldClasificacionLC.setStyle("-fx-border-color: null;");
             }if(!textFieldCodigoBarras.getText().isEmpty()){
-                textFieldCodigoBarras.setStyle("-fx-border-color: off;");
+                textFieldCodigoBarras.setStyle("-fx-border-color: null;");
             }if(!textFieldDescripcion.getText().isEmpty()){
-                textFieldDescripcion.setStyle("-fx-border-color: off;");
+                textFieldDescripcion.setStyle("-fx-border-color: null;");
             }if(!textFieldEdicion.getText().isEmpty()){
-                textFieldEdicion.setStyle("-fx-border-color: off;");
+                textFieldEdicion.setStyle("-fx-border-color: null;");
             }if(!textFieldEditor.getText().isEmpty()){
-                textFieldEditor.setStyle("-fx-border-color: off;");
+                textFieldEditor.setStyle("-fx-border-color: null;");
             }if(!textFieldIdioma.getText().isEmpty()){
-                textFieldIdioma.setStyle("-fx-border-color: off;");
+                textFieldIdioma.setStyle("-fx-border-color: null;");
             }if(!textFieldIsbn.getText().isEmpty()){
-                textFieldIsbn.setStyle("-fx-border-color: off;");
+                textFieldIsbn.setStyle("-fx-border-color: null;");
             }if(!textFieldSerie.getText().isEmpty()){
-                textFieldSerie.setStyle("-fx-border-color: off;");
+                textFieldSerie.setStyle("-fx-border-color: null;");
             }if(!textFieldTemas.getText().isEmpty()){
-                textFieldTemas.setStyle("-fx-border-color: off;");
+                textFieldTemas.setStyle("-fx-border-color: null;");
             }if(!textFieldTipoObra.getText().isEmpty()){
-                textFieldTipoObra.setStyle("-fx-border-color: off;");
+                textFieldTipoObra.setStyle("-fx-border-color: null;");
             }if(!textFieldTitulo.getText().isEmpty()){
-                textFieldTitulo.setStyle("-fx-border-color: off;");
+                textFieldTitulo.setStyle("-fx-border-color: null;");
             }if(!textFieldVolumen.getText().isEmpty()){
-                textFieldVolumen.setStyle("-fx-border-color: off;");
+                textFieldVolumen.setStyle("-fx-border-color: null;");
             }if(datePickerFechaPublicacion.getValue() != null){
-                datePickerFechaPublicacion.setStyle("-fx-border-color: off;");
+                datePickerFechaPublicacion.setStyle("-fx-border-color: null;");
             }
             return validar = true; 
         }

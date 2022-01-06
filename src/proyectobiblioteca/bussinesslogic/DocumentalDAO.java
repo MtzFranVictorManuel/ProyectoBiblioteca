@@ -17,7 +17,7 @@ public class DocumentalDAO implements IDocumental {
     Connection connect = null;
     PreparedStatement preStatement = null;
     private static final String SQL_UPDATE = "UPDATE recursodocumental SET codigoBarras = ?, autor = ?,"
-        + "titulo = ?, clasificacionLC = ?, descripcion = ?, editor = ?, tema = ? WHERE idRecursoDocumental = ?;";
+        + "titulo = ?, clasificacionLC = ?, descripcion = ?, editor = ?, tema = ?, tipoMaterial = ?, numCopias = ? WHERE idRecursoDocumental = ?;";
     private static final String SQL_DELETE = "DELETE recursodocumental WHERE titulo = ?;";
     private static final String SQL_INSERT = "insert into recursodocumental (codigoBarras, autor, titulo, clasificacionLC, "
             + "descripcion, editor, tema, tipoMaterial, numCopias) values (?, ?, ?, ?, ?, ?, ?, ?, ?);";
@@ -112,6 +112,7 @@ public class DocumentalDAO implements IDocumental {
     @Override
     public boolean update(Documental documental, int idRecursoDocumental) {
         connect = DBConnection.getConnection();
+        boolean confirmar = false;
         if(connect != null){
             try{
                 preStatement = connect.prepareStatement(SQL_UPDATE);
@@ -122,7 +123,11 @@ public class DocumentalDAO implements IDocumental {
                 preStatement.setString(5, documental.getDescripcion());
                 preStatement.setString(6, documental.getEditor());
                 preStatement.setString(7, documental.getTema());
-                preStatement.setInt(8, idRecursoDocumental);
+                preStatement.setString(8, documental.getTipoMaterial());
+                preStatement.setInt(9, documental.getNumCopias());
+                preStatement.setInt(10, idRecursoDocumental);
+                preStatement.executeUpdate();
+                confirmar = true;
             }catch(SQLException excepcion){
                 System.out.println(excepcion.getMessage());
             }finally { 
@@ -132,7 +137,7 @@ public class DocumentalDAO implements IDocumental {
                 }
             }
         }
-        return true;
+        return confirmar;
     }
     
     @Override
@@ -255,7 +260,7 @@ public class DocumentalDAO implements IDocumental {
         return 0;
     }
     
-    public boolean selectModificarRecursoDocumental(int idDocumental){
+    public Documental selectModificarRecursoDocumental(int idDocumental){
         connect = DBConnection.getConnection();
         Documental documental = null;
         if(connect != null){
@@ -275,7 +280,7 @@ public class DocumentalDAO implements IDocumental {
                     documental.setTema(rSet.getString("tema"));
                     documental.setTipoMaterial(rSet.getString("tipoMaterial"));
                     documental.setNumCopias(rSet.getInt("numCopias"));
-                    return true;
+                    return documental;
                 }
             }catch(SQLException excepcion){
                 System.out.println(excepcion.getMessage());
@@ -286,6 +291,8 @@ public class DocumentalDAO implements IDocumental {
                 }
             }
         }
-        return false;
+        return documental;
     }
+    
+    
 }

@@ -91,10 +91,12 @@ public class ModificarEliminarRecursoDocumentalController implements Initializab
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        SQLQuery = DocumentalConstants.SQL_SELECT;
-        tableViewRecursoDocumental.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-        setTableView();
-        tableViewRecursoDocumental.setItems(documentalDAO.select(documentalList, SQLQuery));
+        if(textFieldBarraBusqueda.getText().isEmpty() || !textFieldBarraBusqueda.getText().isEmpty()){
+            SQLQuery = DocumentalConstants.SQL_SELECT;
+            tableViewRecursoDocumental.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+            setTableView();
+            tableViewRecursoDocumental.setItems(documentalDAO.select(documentalList, SQLQuery));
+        }       
     }    
     
     public void clicSalir(ActionEvent actionEvent){
@@ -118,9 +120,9 @@ public class ModificarEliminarRecursoDocumentalController implements Initializab
         if(!valueSearch.isEmpty() && (!checkListTitulo.isSelected() && !checkListAutor.isSelected() && !checkListEditor.isSelected()
             && !checkListTema.isSelected() && !checkListCodigoBarras.isSelected())) {
             Alert alertInfo = new Alert(Alert.AlertType.WARNING);
-            alertInfo.setTitle("Error");
-            alertInfo.setHeaderText("No Option Selected");
-            alertInfo.setContentText("Please select a option to do the search");
+            alertInfo.setTitle("No selección de opción");
+            alertInfo.setHeaderText("No se selecciono una opción");
+            alertInfo.setContentText("Por favor seleccione una casilla para realizar la busqueda correspondiente");
             alertInfo.showAndWait();
         }
 
@@ -135,12 +137,25 @@ public class ModificarEliminarRecursoDocumentalController implements Initializab
             tableViewRecursoDocumental.setItems(documentalDAO.select(documentalList, valueSearch, SQLQuery));
             if(documentalList.isEmpty()) {
                 Alert alertInfo = new Alert(Alert.AlertType.INFORMATION);
-                alertInfo.setTitle("INFORMATION");
-                alertInfo.setHeaderText("NO RESULTS");
-                alertInfo.setContentText("The consult you make does not have any results in the database.");
+                alertInfo.setTitle("Información");
+                alertInfo.setHeaderText("No se encontró el resultado");
+                alertInfo.setContentText("La búsqueda realizada no se encuentra en la base de datos, por favor de ingresar un valor válido.");
                 alertInfo.showAndWait();
             }
         } 
+        
+        if(valueSearch.isEmpty() && (!checkListTitulo.isSelected() && !checkListAutor.isSelected() && !checkListEditor.isSelected()
+            && !checkListTema.isSelected() && !checkListCodigoBarras.isSelected())) {
+            SQLQuery = DocumentalConstants.SQL_SELECT;
+            tableViewRecursoDocumental.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+            setTableView();
+            tableViewRecursoDocumental.setItems(documentalDAO.select(documentalList, SQLQuery));
+            Alert alertInfo = new Alert(Alert.AlertType.WARNING);
+            alertInfo.setTitle("Datos no ingresados");
+            alertInfo.setHeaderText("Datos de barra de busqueda no ingresados");
+            alertInfo.setContentText("Ingrese la información dentro de la barra de busqueda y seleccione algun metodo de busqueda");
+            alertInfo.showAndWait();
+        }
     }
 
     public void navigationScreen(String url) {
@@ -221,25 +236,33 @@ public class ModificarEliminarRecursoDocumentalController implements Initializab
     }
     
     private void seleccionRecursoEditar(){
-        Documental documentoEditar = tableViewRecursoDocumental.getSelectionModel().getSelectedItem();
-        int idDocumento = documentoEditar.getIdRecursoDocumental();
-        String titulo = documentoEditar.getTitulo();
-        String materialDocumental = documentoEditar.getTipoMaterial();
-        if (materialDocumental == null) {
+        try{
+            Documental documentoEditar = tableViewRecursoDocumental.getSelectionModel().getSelectedItem();
+            int idDocumento = documentoEditar.getIdRecursoDocumental();
+            String titulo = documentoEditar.getTitulo();
+            String materialDocumental = documentoEditar.getTipoMaterial();
+            if (materialDocumental == null) {
+                Alert alertInfo = new Alert(Alert.AlertType.WARNING);
+                alertInfo.setTitle("Error");
+                alertInfo.setHeaderText("No Row Selected");
+                alertInfo.setContentText("Please select a row to edit");
+                alertInfo.showAndWait();
+            }else {
+                if(materialDocumental.equals("libro")){
+                    Documental.setIdRecursoDocumentalGuarda(idDocumento);
+                    navigationScreen("ModificarLibro.fxml");
+                }
+                if(materialDocumental.equals("multimedia")) {
+                    Documental.setIdRecursoDocumentalGuarda(idDocumento);
+                    navigationScreen("ModificarMultimedia.fxml");
+                }
+            }
+        }catch(NullPointerException exepcion){
             Alert alertInfo = new Alert(Alert.AlertType.WARNING);
-            alertInfo.setTitle("Error");
-            alertInfo.setHeaderText("No Row Selected");
-            alertInfo.setContentText("Please select a row to edit");
+            alertInfo.setTitle("No selección");
+            alertInfo.setHeaderText("No selecciono un elemento de la tabla");
+            alertInfo.setContentText("No se ha seleccionado un elemento dentro de la tabla, por favor seleccione un elemento.");
             alertInfo.showAndWait();
-        }else {
-            if(materialDocumental.equals("libro")){
-                Documental.setIdRecursoDocumentalGuarda(idDocumento);
-                navigationScreen("ModificarLibro.fxml");
-            }
-            if(materialDocumental.equals("multimedia")) {
-                Documental.setIdRecursoDocumentalGuarda(idDocumento);
-                navigationScreen("ModificarMultimedia.fxml");
-            }
         }
     }
 }
