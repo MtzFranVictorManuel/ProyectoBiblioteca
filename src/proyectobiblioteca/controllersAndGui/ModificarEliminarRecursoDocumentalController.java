@@ -25,6 +25,7 @@ import javafx.stage.Stage;
 import proyectobiblioteca.bussinesslogic.DocumentalConstants;
 import proyectobiblioteca.bussinesslogic.DocumentalDAO;
 import proyectobiblioteca.domain.Documental;
+import sun.net.www.MeteredStream;
 
 /**
  * FXML Controller class
@@ -101,24 +102,7 @@ public class ModificarEliminarRecursoDocumentalController implements Initializab
     }
 
     public void clicEditar(ActionEvent actionEvent){
-        Documental documental;
-        documentalList = tableViewRecursoDocumental.getSelectionModel().getSelectedItems();
-        if (documentalList.isEmpty()) {
-            Alert alertInfo = new Alert(Alert.AlertType.WARNING);
-            alertInfo.setTitle("Error");
-            alertInfo.setHeaderText("No Row Selected");
-            alertInfo.setContentText("Please select a row to edit");
-            alertInfo.showAndWait();
-        } else {
-            documental = documentalList.get(0);
-            tipoMaterial = documental.getTipoMaterial();
-            if(tipoMaterial.equals("libro")) {
-                navigationScreen("RegistrarLibro.fxml");
-            }
-            if(tipoMaterial.equals("multimedia")) {
-                navigationScreen("RegistrarMultimedia.fxml");
-            }
-        }
+        seleccionRecursoEditar();
     }
     public void clicEliminar(ActionEvent actionEvent){
         Alert alertInfo = new Alert(Alert.AlertType.WARNING);
@@ -233,6 +217,29 @@ public class ModificarEliminarRecursoDocumentalController implements Initializab
             setCheckBoxEnableOrDisable(true, true, true, true, false);
         } else {
             setCheckBoxEnableOrDisable(false, false, false, false, false);
+        }
+    }
+    
+    private void seleccionRecursoEditar(){
+        Documental documentoEditar = tableViewRecursoDocumental.getSelectionModel().getSelectedItem();
+        int idDocumento = documentoEditar.getIdRecursoDocumental();
+        String titulo = documentoEditar.getTitulo();
+        String materialDocumental = documentoEditar.getTipoMaterial();
+        if (materialDocumental == null) {
+            Alert alertInfo = new Alert(Alert.AlertType.WARNING);
+            alertInfo.setTitle("Error");
+            alertInfo.setHeaderText("No Row Selected");
+            alertInfo.setContentText("Please select a row to edit");
+            alertInfo.showAndWait();
+        }else {
+            if(materialDocumental.equals("libro")){
+                Documental.setIdRecursoDocumentalGuarda(idDocumento);
+                navigationScreen("ModificarLibro.fxml");
+            }
+            if(materialDocumental.equals("multimedia")) {
+                Documental.setIdRecursoDocumentalGuarda(idDocumento);
+                navigationScreen("ModificarMultimedia.fxml");
+            }
         }
     }
 }

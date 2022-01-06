@@ -100,6 +100,7 @@ public class RegistrarLibroController implements Initializable {
                 alertInfo.showAndWait();
             }else{
                 Date fechaPublicacion = Date.valueOf(datePickerFechaPublicacion.getValue()); 
+
                 datosCorrectos(true);
                 if(documentaldao.selectCopiaExistes(codigoBarra, tituloLibro, tipoMaterial) == false){
                     documentaldao.insert(codigoBarra, textFieldAutor.getText(), tituloLibro, textFieldClasificacionLC.getText(), 

@@ -16,7 +16,7 @@ import java.sql.SQLException;
  */
 public class DBConnection {
     private static final String JDBC_USER="root";
-    private static final String JDBC_DATABASE="mydb";
+    private static final String JDBC_DATABASE="basebiblioteca";
     private static final String JDBC_PASSWORD="Man159753";
     private static final String JDBC_URL = "jdbc:mysql://localhost/ "+ JDBC_DATABASE +"?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
     

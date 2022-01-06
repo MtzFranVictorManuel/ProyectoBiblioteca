@@ -9,7 +9,7 @@ package proyectobiblioteca.domain;
  * @author victormanuel
  */
 public class Documental {
-    private static int idRecursoDocumental;
+    private int idRecursoDocumental;
     private String codigoBarras;
     private String autor;
     private String titulo;
@@ -19,9 +19,14 @@ public class Documental {
     private String tema;
     private String tipoMaterial;
     private int numCopias;
+    private static int idRecursoDocumentalGuarda;
 
     public Documental() {
     
+    }
+
+    public Documental(int idRecursoDocumental) {
+        this.idRecursoDocumental = idRecursoDocumental;
     }
 
     public Documental(String codigoBarras, String autor, String titulo, String clasificacionLC, String descripcion, String editor, String tema, String tipoMaterial, int numCopias) {
@@ -55,7 +60,7 @@ public class Documental {
     }
 
     public void setIdRecursoDocumental(int idRecursoDocumental) {
-        Documental.idRecursoDocumental = idRecursoDocumental;
+        this.idRecursoDocumental = idRecursoDocumental;
     }
 
     public String getCodigoBarras() {
@@ -130,4 +135,11 @@ public class Documental {
         this.numCopias = numCopias;
     }
 
+    public static int getIdRecursoDocumentalGuarda() {
+        return idRecursoDocumentalGuarda;
+    }
+
+    public static void setIdRecursoDocumentalGuarda(int idRecursoDocumentalGuarda) {
+        Documental.idRecursoDocumentalGuarda = idRecursoDocumentalGuarda;
+    }
 }

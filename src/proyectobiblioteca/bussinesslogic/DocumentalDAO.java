@@ -22,8 +22,10 @@ public class DocumentalDAO implements IDocumental {
     private static final String SQL_INSERT = "insert into recursodocumental (codigoBarras, autor, titulo, clasificacionLC, "
             + "descripcion, editor, tema, tipoMaterial, numCopias) values (?, ?, ?, ?, ?, ?, ?, ?, ?);";
     private static final String SQL_SELECT_BUSCARCOPIA = "select * from recursodocumental where codigoBarras = ? and titulo = ? and tipoMaterial = ?;";
-    private static final String GUARDARCOPIA = "update recursodocumental set numCopias = numCopias + 1 where idRecursoDocumental = ?;";
-    private static final String SQL_SELECT_idRecursoDocumental = "select idRecursoDocumental from recursoDocumental where titulo = ? and codigoBarras = ? and autor = ?;";
+    private static final String SQL_UPDATE_GUARDARCOPIA = "update recursodocumental set numCopias = numCopias + 1 where idRecursoDocumental = ?;";
+    private static final String SQL_SELECT_IDRECURSODOCUMENTAL = "select idRecursoDocumental from recursoDocumental where titulo = ? and codigoBarras = ? and autor = ?;";
+    private static final String SQL_SELECT_RECURSODOCUMENTAL = "select * from recursodocumental where idrecursodocumental = ?;";
+    
     
     public DocumentalDAO() {
         
@@ -139,7 +141,7 @@ public class DocumentalDAO implements IDocumental {
         boolean validar = false;
         if(connect != null){
             try{
-                preStatement = connect.prepareStatement(GUARDARCOPIA);
+                preStatement = connect.prepareStatement(SQL_UPDATE_GUARDARCOPIA );
                 preStatement.setInt(1, idRecursoDocumental);
                 preStatement.executeUpdate();
                 validar = true;
@@ -231,7 +233,7 @@ public class DocumentalDAO implements IDocumental {
         connect = DBConnection.getConnection();
         if(connect != null){
             try{
-                preStatement = connect.prepareStatement(SQL_SELECT_idRecursoDocumental);
+                preStatement = connect.prepareStatement(SQL_SELECT_IDRECURSODOCUMENTAL);
                 preStatement.setString(1, titulo);
                 preStatement.setString(2, codigoBarras);
                 preStatement.setString(3, autor);
@@ -253,4 +255,37 @@ public class DocumentalDAO implements IDocumental {
         return 0;
     }
     
+    public boolean selectModificarRecursoDocumental(int idDocumental){
+        connect = DBConnection.getConnection();
+        Documental documental = null;
+        if(connect != null){
+            try{
+                preStatement = connect.prepareStatement(SQL_SELECT_RECURSODOCUMENTAL);
+                preStatement.setInt(1, idDocumental);
+                ResultSet rSet = preStatement.executeQuery();
+                if(rSet.next()){
+                    documental = new Documental();
+                    documental.setIdRecursoDocumental(rSet.getInt("idRecursoDocumental"));
+                    documental.setCodigoBarras(rSet.getString("codigoBarras"));
+                    documental.setAutor(rSet.getString("autor"));
+                    documental.setTitulo(rSet.getString("titulo"));
+                    documental.setClasificacionLC(rSet.getString("clasificacionLC"));
+                    documental.setDescripcion(rSet.getString("descripcion"));
+                    documental.setEditor(rSet.getString("editor"));
+                    documental.setTema(rSet.getString("tema"));
+                    documental.setTipoMaterial(rSet.getString("tipoMaterial"));
+                    documental.setNumCopias(rSet.getInt("numCopias"));
+                    return true;
+                }
+            }catch(SQLException excepcion){
+                System.out.println(excepcion.getMessage());
+            }finally { 
+                DBConnection.close(preStatement);
+                if (this.connection == null) {
+                    DBConnection.close(connect);
+                }
+            }
+        }
+        return false;
+    }
 }
