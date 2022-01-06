@@ -13,16 +13,17 @@
    <children>
       <TextField fx:id="textFieldBarraBusqueda" layoutX="27.0" layoutY="36.0" prefHeight="26.0" prefWidth="489.0" />
       <Button layoutX="516.0" layoutY="36.0" mnemonicParsing="false" onAction="#clicBuscar" text="Buscar" />
-      <TableView fx:id="tableViewRecursoDocumental" layoutX="27.0" layoutY="132.0" prefHeight="365.0" prefWidth="933.0">
+      <TableView fx:id="tableViewRecursoDocumental" layoutX="27.0" layoutY="132.0" prefHeight="365.0" prefWidth="947.0">
         <columns>
           <TableColumn fx:id="columnTitulo" prefWidth="75.0" text="Titulo" />
           <TableColumn fx:id="columnAutor" prefWidth="75.0" text="Autor" />
             <TableColumn fx:id="columnEditor" prefWidth="75.0" text="Editor" />
             <TableColumn fx:id="columnTema" prefWidth="105.0" text="Temas" />
-            <TableColumn fx:id="columnDescripcion" prefWidth="214.77972412109375" text="Descripción" />
-            <TableColumn fx:id="columnClasificacionLC" prefWidth="153.72027587890625" text="Calificación LC:" />
-            <TableColumn fx:id="columnTipoMaterial" prefWidth="113.1312255859375" text="Tipo de material" />
-            <TableColumn fx:id="columnNumeroCopias" prefWidth="120.995361328125" text="Numero de copias" />
+            <TableColumn fx:id="columnDescripcion" prefWidth="136.0" text="Descripción" />
+            <TableColumn fx:id="columnClasificacionLC" prefWidth="111.0" text="Calificación LC:" />
+            <TableColumn fx:id="columnTipoMaterial" prefWidth="127.5" text="Tipo de material" />
+            <TableColumn fx:id="columnNumeroCopias" prefWidth="120.0" text="Numero de copias" />
+            <TableColumn fx:id="columnCodigoBarras" prefWidth="120.0" text="Codigo de barras" />
         </columns>
       </TableView>
       <Button layoutX="27.0" layoutY="520.0" mnemonicParsing="false" onAction="#clicSalir" text="Salir" />

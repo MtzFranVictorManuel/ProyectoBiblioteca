@@ -25,7 +25,6 @@ import javafx.stage.Stage;
 import proyectobiblioteca.bussinesslogic.DocumentalConstants;
 import proyectobiblioteca.bussinesslogic.DocumentalDAO;
 import proyectobiblioteca.domain.Documental;
-import sun.net.www.MeteredStream;
 
 /**
  * FXML Controller class
@@ -59,6 +58,9 @@ public class ModificarEliminarRecursoDocumentalController implements Initializab
     
     @FXML
     private TableColumn columnNumeroCopias;
+    
+    @FXML
+    private TableColumn columnCodigoBarras;
 
     @FXML
     private TableView<Documental> tableViewRecursoDocumental;
@@ -91,12 +93,10 @@ public class ModificarEliminarRecursoDocumentalController implements Initializab
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        if(textFieldBarraBusqueda.getText().isEmpty() || !textFieldBarraBusqueda.getText().isEmpty()){
-            SQLQuery = DocumentalConstants.SQL_SELECT;
-            tableViewRecursoDocumental.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-            setTableView();
-            tableViewRecursoDocumental.setItems(documentalDAO.select(documentalList, SQLQuery));
-        }       
+        SQLQuery = DocumentalConstants.SQL_SELECT;
+        tableViewRecursoDocumental.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+        setTableView();
+        tableViewRecursoDocumental.setItems(documentalDAO.select(documentalList, SQLQuery));      
     }    
     
     public void clicSalir(ActionEvent actionEvent){
@@ -116,9 +116,10 @@ public class ModificarEliminarRecursoDocumentalController implements Initializab
     public void clicBuscar(ActionEvent actionEvent){
         setTableView();
         valueSearch = textFieldBarraBusqueda.getText();
-
         if(!valueSearch.isEmpty() && (!checkListTitulo.isSelected() && !checkListAutor.isSelected() && !checkListEditor.isSelected()
             && !checkListTema.isSelected() && !checkListCodigoBarras.isSelected())) {
+            SQLQuery = DocumentalConstants.SQL_SELECT;
+            tableViewRecursoDocumental.setItems(documentalDAO.select(documentalList, SQLQuery));
             Alert alertInfo = new Alert(Alert.AlertType.WARNING);
             alertInfo.setTitle("No selección de opción");
             alertInfo.setHeaderText("No se selecciono una opción");
@@ -143,19 +144,6 @@ public class ModificarEliminarRecursoDocumentalController implements Initializab
                 alertInfo.showAndWait();
             }
         } 
-        
-        if(valueSearch.isEmpty() && (!checkListTitulo.isSelected() && !checkListAutor.isSelected() && !checkListEditor.isSelected()
-            && !checkListTema.isSelected() && !checkListCodigoBarras.isSelected())) {
-            SQLQuery = DocumentalConstants.SQL_SELECT;
-            tableViewRecursoDocumental.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-            setTableView();
-            tableViewRecursoDocumental.setItems(documentalDAO.select(documentalList, SQLQuery));
-            Alert alertInfo = new Alert(Alert.AlertType.WARNING);
-            alertInfo.setTitle("Datos no ingresados");
-            alertInfo.setHeaderText("Datos de barra de busqueda no ingresados");
-            alertInfo.setContentText("Ingrese la información dentro de la barra de busqueda y seleccione algun metodo de busqueda");
-            alertInfo.showAndWait();
-        }
     }
 
     public void navigationScreen(String url) {
@@ -180,6 +168,7 @@ public class ModificarEliminarRecursoDocumentalController implements Initializab
         this.columnClasificacionLC.setCellValueFactory(new PropertyValueFactory("clasificacionLC"));
         this.columnTipoMaterial.setCellValueFactory(new PropertyValueFactory("tipoMaterial"));
         this.columnNumeroCopias.setCellValueFactory(new PropertyValueFactory("numCopias"));
+        this.columnCodigoBarras.setCellValueFactory(new PropertyValueFactory("codigoBarras"));
     }
 
     public void setCheckBoxEnableOrDisable(boolean titulo, boolean autor, boolean editor, boolean tema, boolean codigoBarras) {

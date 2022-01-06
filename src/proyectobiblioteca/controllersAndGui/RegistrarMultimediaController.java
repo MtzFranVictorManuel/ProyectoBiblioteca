@@ -79,49 +79,64 @@ public class RegistrarMultimediaController implements Initializable {
     
     public void clicSalir(ActionEvent actionEvent){
         
+        
     }
     
     public void clicRegistrar(ActionEvent actionEvent){
-        String codigoBarra = textFieldCodigoBarras.getText();
-        String tituloMultimedia = textFieldTitulo.getText();
-        String tipoMaterial = "multimedia";
-        String duracion = textFieldDuraionHora.getText() + ":" + 
-                textFieldDuraionMinutos.getText() + ":" + textFieldDuraionSegundos.getText();
-        int idRecursoDocumental;
-        if(textFieldAutor.getText().isEmpty() || textFieldClasificacionLC.getText().isEmpty() || textFieldCodigoBarras.getText().isEmpty() 
-                || textFieldDescripcion.getText().isEmpty() || textFieldDuraionHora.getText().isEmpty() || textFieldDuraionMinutos.getText().isEmpty()
-                || textFieldDuraionSegundos.getText().isEmpty() || textFieldDuraionSegundos.getText().equals("00") || textFieldEditor.getText().isEmpty() 
-                || textFieldFormato.getText().isEmpty() || textFieldTemas.getText().isEmpty() || textFieldTipoDocumento.getText().isEmpty() || textFieldTitulo.getText().isEmpty()){
+        try{
+            String codigoBarra = textFieldCodigoBarras.getText();
+            String tituloMultimedia = textFieldTitulo.getText();
+            String tipoMaterial = "multimedia";
+            String duracion = textFieldDuraionHora.getText() + ":" + 
+                    textFieldDuraionMinutos.getText() + ":" + textFieldDuraionSegundos.getText();
+            int idRecursoDocumental;
+            if(textFieldDuraionSegundos.getText().equals("00") || textFieldDuraionSegundos.getText().isEmpty() || textFieldDuraionMinutos.getText().isEmpty()
+                    || textFieldDuraionHora.getText().isEmpty()){
+                datosCorrectos(true);
+                datosErroenes(true);
+                Alert alertInfo = new Alert(Alert.AlertType.ERROR);
+                alertInfo.setTitle("Datos vacíos");
+                alertInfo.setContentText("Los datos ingresados son vacions, por favor de validar que los datos sean correctos.");
+                alertInfo.showAndWait();
+            }else{
+                datosCorrectos(true);
+                if(documentaldao.selectCopiaExistes(codigoBarra, tituloMultimedia, tipoMaterial) == false){
+                    documentaldao.insert(textFieldCodigoBarras.getText(), textFieldAutor.getText(), 
+                            textFieldTitulo.getText(), textFieldClasificacionLC.getText(), 
+                            textFieldDescripcion.getText(), textFieldEditor.getText(), textFieldTemas.getText(), tipoMaterial, 1);
+                    idRecursoDocumental = documentaldao.selectIdRecursoDocumental(textFieldTitulo.getText(), textFieldCodigoBarras.getText(), textFieldAutor.getText());
+                    if(idRecursoDocumental == 0){
+                        Alert alertInfo = new Alert(Alert.AlertType.WARNING);
+                        alertInfo.setTitle("Error");
+                        alertInfo.setHeaderText("No se guardo el recurso documental");
+                        alertInfo.setContentText("El recurso documental ingresado no fue guardado correctamente");
+                        alertInfo.showAndWait();
+                    }
+                    multimedidao.insert(textFieldTipoDocumento.getText(), Time.valueOf(duracion), textFieldFormato.getText(), idRecursoDocumental);         
+                    limpiarCampos();
+                }else{
+                    if(alertaConfirmacion("Copia", "Recurso documetal existente", 
+                            "El recurso documental ingresado ya existe en el sistema, ¿Desea guardarlo como copia?")== true){
+                        idRecursoDocumental = documentaldao.selectIdRecursoDocumental(textFieldTitulo.getText(), textFieldCodigoBarras.getText(), textFieldAutor.getText());
+                        documentaldao.updateCopia(idRecursoDocumental);
+                        limpiarCampos();
+                    }
+                } 
+            }
+        }catch(NullPointerException ex){
             datosCorrectos(true);
             datosErroenes(true);
             Alert alertInfo = new Alert(Alert.AlertType.ERROR);
             alertInfo.setTitle("Datos vacíos");
             alertInfo.setContentText("Los datos ingresados son vacions, por favor de validar que los datos sean correctos.");
             alertInfo.showAndWait();
-        }else{
+        }catch(NumberFormatException exNum){
             datosCorrectos(true);
-            if(documentaldao.selectCopiaExistes(codigoBarra, tituloMultimedia, tipoMaterial) == false){
-                documentaldao.insert(textFieldCodigoBarras.getText(), textFieldAutor.getText(), 
-                        textFieldTitulo.getText(), textFieldClasificacionLC.getText(), 
-                        textFieldDescripcion.getText(), textFieldEditor.getText(), textFieldTemas.getText(), tipoMaterial, 1);
-                idRecursoDocumental = documentaldao.selectIdRecursoDocumental(textFieldTitulo.getText(), textFieldCodigoBarras.getText(), textFieldAutor.getText());
-                if(idRecursoDocumental == 0){
-                    Alert alertInfo = new Alert(Alert.AlertType.WARNING);
-                    alertInfo.setTitle("Error");
-                    alertInfo.setHeaderText("No se guardo el recurso documental");
-                    alertInfo.setContentText("El recurso documental ingresado no fue guardado correctamente");
-                    alertInfo.showAndWait();
-                }
-                multimedidao.insert(textFieldTipoDocumento.getText(), Time.valueOf(duracion), textFieldFormato.getText(), idRecursoDocumental);         
-                limpiarCampos();
-            }else{
-                if(alertaConfirmacion("Copia", "Recurso documetal existente", 
-                        "El recurso documental ingresado ya existe en el sistema, ¿Desea guardarlo como copia?")== true){
-                    idRecursoDocumental = documentaldao.selectIdRecursoDocumental(textFieldTitulo.getText(), textFieldCodigoBarras.getText(), textFieldAutor.getText());
-                    documentaldao.updateCopia(idRecursoDocumental);
-                    limpiarCampos();
-                }
-            } 
+            datosErroenes(true);
+            Alert alertInfo = new Alert(Alert.AlertType.ERROR);
+            alertInfo.setTitle("Datos vacíos");
+            alertInfo.setContentText("Los datos ingresados son vacions, por favor de validar que los datos sean correctos.");
+            alertInfo.showAndWait();
         }
     }
    

@@ -70,7 +70,7 @@ public class MultimediaDAO {
         return rows;
     }
     
-    public Multimedia seleccionarLibro (int idRecursoDocumental){
+    public Multimedia seleccionarMultimedia (int idRecursoDocumental){
         connect = DBConnection.getConnection();
         Multimedia multimedia = null;
         if(connect != null){

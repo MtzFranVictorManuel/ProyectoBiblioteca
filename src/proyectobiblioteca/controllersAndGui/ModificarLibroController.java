@@ -92,7 +92,6 @@ public class ModificarLibroController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         formatoNumerico();
-        String volumenLibro = Integer.toString(libroInf.getVolumen());
         textFieldAutor.setText(recursoDocumentalInf.getAutor());
         textFieldClasificacionLC.setText(recursoDocumentalInf.getClasificacionLC());
         textFieldCodigoBarras.setText(recursoDocumentalInf.getCodigoBarras());
@@ -108,7 +107,8 @@ public class ModificarLibroController implements Initializable {
             textFieldIdioma.setText("");
             textFieldSerie.setText("");
             textFieldTipoObra.setText("");
-        }else{
+        }else{           
+            String volumenLibro = Integer.toString(libroInf.getVolumen());
             DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd"); 
             String fecha = dateFormat.format(libroInf.getFechaPublicacion());       
             textFieldIsbn.setText(libroInf.getIsbn());
@@ -253,7 +253,7 @@ public class ModificarLibroController implements Initializable {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
                  if(!newValue.matches("\\sa-zA-Z*")){
-                     textFieldVolumen.setText(newValue.replaceAll("[^\\sa-zA-Z]", ""));
+                     textFieldIdioma.setText(newValue.replaceAll("[^\\sa-zA-Z]", ""));
                  }               
             }               
         });
