@@ -131,62 +131,75 @@ public class ModificarLibroController implements Initializable {
             String tituloLibro = textFieldTitulo.getText();
             String tipoMaterial = "libro";
             int idRecursoDocumental;
-            if(Integer.valueOf(textFielNumeroCopias.getText()) <= 0){
+            if(textFieldAutor.getText().isEmpty() || textFieldClasificacionLC.getText().isEmpty() || textFieldCodigoBarras.getText().isEmpty()
+                    || textFieldDescripcion.getText().isEmpty() || textFieldEdicion.getText().isEmpty() || textFieldEditor.getText().isEmpty()
+                    || textFieldIdioma.getText().isEmpty() || textFieldIsbn.getText().isEmpty() || textFieldSerie.getText().isEmpty()
+                    || textFieldTemas.getText().isEmpty() || textFieldTipoObra.getText().isEmpty() || textFieldTitulo.getText().isEmpty()
+                    || textFieldVolumen.getText().isEmpty()){
+                datosErroneso(true);
                 Alert alertInfo = new Alert(Alert.AlertType.WARNING);
                 alertInfo.setTitle("Numero invalido");
                 alertInfo.setHeaderText("Numero de copias invalido");
                 alertInfo.setContentText("El numero de copias no puede ser 0 o menor a 0, por favor de escribir un numero mayor a 0");
-                alertInfo.showAndWait();
+                alertInfo.showAndWait();                
             }else{
-                Date fechaPublicacion = Date.valueOf(datePickerFechaPublicacion.getValue()); 
-                datosCorrectos(true);
-                int volumenLibro = Integer.parseInt(textFieldVolumen.getText());
-                Libro libroNuevo = new Libro();
-                if(datosCorrectos(true) == true){
-                    idRecursoDocumental = documentaldao.selectIdRecursoDocumental(tituloLibro, codigoBarra, textFieldAutor.getText());
-                    documental.setTitulo(tituloLibro);
-                    documental.setAutor(textFieldAutor.getText());
-                    documental.setEditor(textFieldEditor.getText());
-                    documental.setTema(textFieldTemas.getText());
-                    documental.setDescripcion(textFieldDescripcion.getText());
-                    documental.setClasificacionLC(textFieldClasificacionLC.getText());
-                    documental.setCodigoBarras(codigoBarra);
-                    documental.setTipoMaterial(tipoMaterial);
-                    documental.setNumCopias(Integer.parseInt(textFielNumeroCopias.getText()));
-                    documentaldao.update(documental, idRecursoDocumental);
-                    if(idRecursoDocumental == 0){
-                        Alert alertInfo = new Alert(Alert.AlertType.WARNING);
-                        alertInfo.setTitle("Error");
-                        alertInfo.setHeaderText("No se guardo el recurso documental");
-                        alertInfo.setContentText("El recurso documental ingresado no fue guardado correctamente");
-                        alertInfo.showAndWait();
-                    }else{
-                        if(libroInf == null){
-                            libroNuevo.setEdicion(textFieldEdicion.getText());
-                            libroNuevo.setIsbn(textFieldIsbn.getText());
-                            libroNuevo.setFechaPublicacion(fechaPublicacion);
-                            libroNuevo.setIdioma(textFieldIdioma.getText());
-                            libroNuevo.setSerie(textFieldSerie.getText());
-                            libroNuevo.setVolumen(volumenLibro);
-                            libroNuevo.setTipoObraLiteraria(textFieldTipoObra.getText());
-                            librodao.insertar(libroNuevo, idRecursoDocumental);
-                            if(alertaConfirmarActualizacion(tituloLibro)){
-                               navigationScreen("ModificarEliminarRecursoDocumental.fxml");  
-                            }      
-                        }else{                         
-                            libroNuevo.setEdicion(textFieldEdicion.getText());
-                            libroNuevo.setIsbn(textFieldIsbn.getText());
-                            libroNuevo.setFechaPublicacion(fechaPublicacion);
-                            libroNuevo.setIdioma(textFieldIdioma.getText());
-                            libroNuevo.setSerie(textFieldSerie.getText());
-                            libroNuevo.setVolumen(volumenLibro);
-                            libroNuevo.setTipoObraLiteraria(textFieldTipoObra.getText());
-                            librodao.update(libroNuevo, idRecursoDocumental);
-                            if(alertaConfirmarActualizacion(tituloLibro)){
-                               navigationScreen("ModificarEliminarRecursoDocumental.fxml");  
-                            }
-                        }                       
-                    }            
+                if(Integer.valueOf(textFielNumeroCopias.getText()) <= 0){
+                    Alert alertInfo = new Alert(Alert.AlertType.WARNING);
+                    alertInfo.setTitle("Numero invalido");
+                    alertInfo.setHeaderText("Numero de copias invalido");
+                    alertInfo.setContentText("El numero de copias no puede ser 0 o menor a 0, por favor de escribir un numero mayor a 0");
+                    alertInfo.showAndWait();
+                }else{
+                    Date fechaPublicacion = Date.valueOf(datePickerFechaPublicacion.getValue()); 
+                    datosCorrectos(true);
+                    int volumenLibro = Integer.parseInt(textFieldVolumen.getText());
+                    Libro libroNuevo = new Libro();
+                    if(datosCorrectos(true) == true){
+                        idRecursoDocumental = documentaldao.selectIdRecursoDocumental(tituloLibro, codigoBarra, textFieldAutor.getText());
+                        documental.setTitulo(tituloLibro);
+                        documental.setAutor(textFieldAutor.getText());
+                        documental.setEditor(textFieldEditor.getText());
+                        documental.setTema(textFieldTemas.getText());
+                        documental.setDescripcion(textFieldDescripcion.getText());
+                        documental.setClasificacionLC(textFieldClasificacionLC.getText());
+                        documental.setCodigoBarras(codigoBarra);
+                        documental.setTipoMaterial(tipoMaterial);
+                        documental.setNumCopias(Integer.parseInt(textFielNumeroCopias.getText()));
+                        documentaldao.update(documental, idRecursoDocumental);
+                        if(idRecursoDocumental == 0){
+                            Alert alertInfo = new Alert(Alert.AlertType.WARNING);
+                            alertInfo.setTitle("Error");
+                            alertInfo.setHeaderText("No se guardo el recurso documental");
+                            alertInfo.setContentText("El recurso documental ingresado no fue guardado correctamente");
+                            alertInfo.showAndWait();
+                        }else{
+                            if(libroInf == null){
+                                libroNuevo.setEdicion(textFieldEdicion.getText());
+                                libroNuevo.setIsbn(textFieldIsbn.getText());
+                                libroNuevo.setFechaPublicacion(fechaPublicacion);
+                                libroNuevo.setIdioma(textFieldIdioma.getText());
+                                libroNuevo.setSerie(textFieldSerie.getText());
+                                libroNuevo.setVolumen(volumenLibro);
+                                libroNuevo.setTipoObraLiteraria(textFieldTipoObra.getText());
+                                librodao.insertar(libroNuevo, idRecursoDocumental);
+                                if(alertaConfirmarActualizacion(tituloLibro)){
+                                   navigationScreen("ModificarEliminarRecursoDocumental.fxml");  
+                                }      
+                            }else{                         
+                                libroNuevo.setEdicion(textFieldEdicion.getText());
+                                libroNuevo.setIsbn(textFieldIsbn.getText());
+                                libroNuevo.setFechaPublicacion(fechaPublicacion);
+                                libroNuevo.setIdioma(textFieldIdioma.getText());
+                                libroNuevo.setSerie(textFieldSerie.getText());
+                                libroNuevo.setVolumen(volumenLibro);
+                                libroNuevo.setTipoObraLiteraria(textFieldTipoObra.getText());
+                                librodao.update(libroNuevo, idRecursoDocumental);
+                                if(alertaConfirmarActualizacion(tituloLibro)){
+                                   navigationScreen("ModificarEliminarRecursoDocumental.fxml");  
+                                }
+                            }                       
+                        }            
+                    }
                 }
             }
         }catch(NullPointerException ex){

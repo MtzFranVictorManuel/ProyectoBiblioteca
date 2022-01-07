@@ -112,9 +112,11 @@ public class ModificarMultimediaController implements Initializable {
             String tipoMaterial = "multimedia";
             int idRecursoDocumental;
             datosErroenes(true);
-            if(Integer.valueOf(textFielNumeroCopias.getText()) <= 0 || textFieldDuraionSegundos.getText().equals("00")
-                    || textFieldDuraionSegundos.getText().isEmpty() || textFieldDuraionMinutos.getText().isEmpty()
-                    || textFieldDuraionHora.getText().isEmpty()){
+            if(Integer.valueOf(textFielNumeroCopias.getText()) <= 0 || textFieldDuraionSegundos.getText().equals("00") || textFieldDuraionSegundos.getText().isEmpty() || textFieldDuraionMinutos.getText().isEmpty()
+                    || textFieldDuraionHora.getText().isEmpty() || textFieldAutor.getText().isEmpty() || textFieldClasificacionLC.getText().isEmpty()
+                    || textFieldCodigoBarras.getText().isEmpty() || textFieldDescripcion.getText().isEmpty() || textFieldEditor.getText().isEmpty()
+                    || textFieldFormato.getText().isEmpty() || textFieldTemas.getText().isEmpty() || textFieldTipoDocumento.getText().isEmpty()
+                    || textFieldTitulo.getText().isEmpty()){
                 datosErroenes(true);
                 Alert alertInfo = new Alert(Alert.AlertType.WARNING);
                 alertInfo.setTitle("Numero invalido");

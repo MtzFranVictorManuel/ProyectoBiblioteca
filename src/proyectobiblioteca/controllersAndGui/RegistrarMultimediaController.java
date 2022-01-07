@@ -94,7 +94,10 @@ public class RegistrarMultimediaController implements Initializable {
                     textFieldDuraionMinutos.getText() + ":" + textFieldDuraionSegundos.getText();
             int idRecursoDocumental;
             if(textFieldDuraionSegundos.getText().equals("00") || textFieldDuraionSegundos.getText().isEmpty() || textFieldDuraionMinutos.getText().isEmpty()
-                    || textFieldDuraionHora.getText().isEmpty()){
+                    || textFieldDuraionHora.getText().isEmpty() || textFieldAutor.getText().isEmpty() || textFieldClasificacionLC.getText().isEmpty()
+                    || textFieldCodigoBarras.getText().isEmpty() || textFieldDescripcion.getText().isEmpty() || textFieldEditor.getText().isEmpty()
+                    || textFieldFormato.getText().isEmpty() || textFieldTemas.getText().isEmpty() || textFieldTipoDocumento.getText().isEmpty()
+                    || textFieldTitulo.getText().isEmpty()){
                 datosCorrectos(true);
                 datosErroenes(true);
                 Alert alertInfo = new Alert(Alert.AlertType.ERROR);
@@ -244,7 +247,7 @@ public class RegistrarMultimediaController implements Initializable {
                 textFieldCodigoBarras.setStyle("-fx-border-color: red;");
             }if(textFieldDescripcion.getText().isEmpty()){
                 textFieldDescripcion.setStyle("-fx-border-color: red;");
-            }if(textFieldDuraionHora.getText().equals("00") || textFieldDuraionHora.getText().isEmpty()){
+            }if(textFieldDuraionHora.getText().isEmpty()){
                 textFieldDuraionHora.setStyle("-fx-border-color: red;");
             }if(textFieldDuraionMinutos.getText().equals("00") || textFieldDuraionMinutos.getText().isEmpty()){
                 textFieldDuraionMinutos.setStyle("-fx-border-color: red;");
@@ -261,13 +264,13 @@ public class RegistrarMultimediaController implements Initializable {
             }if(textFieldTitulo.getText().isEmpty()){
                 textFieldTitulo.setStyle("-fx-border-color: red;");
             }
-            return validar = true;
+            validar = false;
         }
-        return false;
+        return validar;
     }
     
     public boolean datosCorrectos(boolean validar){
-        while(validar == true){
+        while(validar == false){
             if(!textFieldAutor.getText().isEmpty()){
                 textFieldAutor.setStyle("-fx-border-color: null;");
             }if(!textFieldClasificacionLC.getText().isEmpty()){
@@ -293,9 +296,9 @@ public class RegistrarMultimediaController implements Initializable {
             }if(!textFieldTitulo.getText().isEmpty()){
                 textFieldTitulo.setStyle("-fx-border-color: null;");
             }
-            return validar = true;
+            validar = true;
         }
-        return false;
+        return validar;
     }
     
     public void limpiarCampos(){
