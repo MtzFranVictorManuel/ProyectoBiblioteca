@@ -131,17 +131,18 @@ public class ModificarLibroController implements Initializable {
             String tituloLibro = textFieldTitulo.getText();
             String tipoMaterial = "libro";
             int idRecursoDocumental;
+            datosCorrectos(true);
             if(textFieldAutor.getText().isEmpty() || textFieldClasificacionLC.getText().isEmpty() || textFieldCodigoBarras.getText().isEmpty()
                     || textFieldDescripcion.getText().isEmpty() || textFieldEdicion.getText().isEmpty() || textFieldEditor.getText().isEmpty()
                     || textFieldIdioma.getText().isEmpty() || textFieldIsbn.getText().isEmpty() || textFieldSerie.getText().isEmpty()
                     || textFieldTemas.getText().isEmpty() || textFieldTipoObra.getText().isEmpty() || textFieldTitulo.getText().isEmpty()
                     || textFieldVolumen.getText().isEmpty()){
+                datosCorrectos(true);
                 datosErroneso(true);
-                Alert alertInfo = new Alert(Alert.AlertType.WARNING);
-                alertInfo.setTitle("Numero invalido");
-                alertInfo.setHeaderText("Numero de copias invalido");
-                alertInfo.setContentText("El numero de copias no puede ser 0 o menor a 0, por favor de escribir un numero mayor a 0");
-                alertInfo.showAndWait();                
+                Alert alertInfo = new Alert(Alert.AlertType.ERROR);
+                alertInfo.setTitle("Datos vacíos");
+                alertInfo.setContentText("Los datos ingresados son vacions, por favor de validar que los datos sean correctos.");
+                alertInfo.showAndWait();               
             }else{
                 if(Integer.valueOf(textFielNumeroCopias.getText()) <= 0){
                     Alert alertInfo = new Alert(Alert.AlertType.WARNING);

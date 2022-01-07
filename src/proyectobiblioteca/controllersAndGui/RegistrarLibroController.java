@@ -92,6 +92,7 @@ public class RegistrarLibroController implements Initializable {
             String tipoMaterial = "libro";
             int idRecursoDocumental;
             Date fechaPublicacion = Date.valueOf(datePickerFechaPublicacion.getValue()); 
+            datosCorrectos(true);
             if(textFieldAutor.getText().isEmpty() || textFieldClasificacionLC.getText().isEmpty() || textFieldCodigoBarras.getText().isEmpty()
                     || textFieldDescripcion.getText().isEmpty() || textFieldEdicion.getText().isEmpty() || textFieldEditor.getText().isEmpty()
                     || textFieldIdioma.getText().isEmpty() || textFieldIsbn.getText().isEmpty() || textFieldSerie.getText().isEmpty()

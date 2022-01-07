@@ -93,6 +93,7 @@ public class RegistrarMultimediaController implements Initializable {
             String duracion = textFieldDuraionHora.getText() + ":" + 
                     textFieldDuraionMinutos.getText() + ":" + textFieldDuraionSegundos.getText();
             int idRecursoDocumental;
+            datosCorrectos(true);
             if(textFieldDuraionSegundos.getText().equals("00") || textFieldDuraionSegundos.getText().isEmpty() || textFieldDuraionMinutos.getText().isEmpty()
                     || textFieldDuraionHora.getText().isEmpty() || textFieldAutor.getText().isEmpty() || textFieldClasificacionLC.getText().isEmpty()
                     || textFieldCodigoBarras.getText().isEmpty() || textFieldDescripcion.getText().isEmpty() || textFieldEditor.getText().isEmpty()
@@ -270,7 +271,7 @@ public class RegistrarMultimediaController implements Initializable {
     }
     
     public boolean datosCorrectos(boolean validar){
-        while(validar == false){
+        while(validar == true){
             if(!textFieldAutor.getText().isEmpty()){
                 textFieldAutor.setStyle("-fx-border-color: null;");
             }if(!textFieldClasificacionLC.getText().isEmpty()){
@@ -296,7 +297,7 @@ public class RegistrarMultimediaController implements Initializable {
             }if(!textFieldTitulo.getText().isEmpty()){
                 textFieldTitulo.setStyle("-fx-border-color: null;");
             }
-            validar = true;
+            validar = false;
         }
         return validar;
     }

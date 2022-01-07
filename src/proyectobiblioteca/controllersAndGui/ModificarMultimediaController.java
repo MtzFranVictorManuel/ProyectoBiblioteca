@@ -111,17 +111,16 @@ public class ModificarMultimediaController implements Initializable {
             String tituloLibro = textFieldTitulo.getText();
             String tipoMaterial = "multimedia";
             int idRecursoDocumental;
-            datosErroenes(true);
+            datosCorrectos(true);
             if(Integer.valueOf(textFielNumeroCopias.getText()) <= 0 || textFieldDuraionSegundos.getText().equals("00") || textFieldDuraionSegundos.getText().isEmpty() || textFieldDuraionMinutos.getText().isEmpty()
                     || textFieldDuraionHora.getText().isEmpty() || textFieldAutor.getText().isEmpty() || textFieldClasificacionLC.getText().isEmpty()
                     || textFieldCodigoBarras.getText().isEmpty() || textFieldDescripcion.getText().isEmpty() || textFieldEditor.getText().isEmpty()
                     || textFieldFormato.getText().isEmpty() || textFieldTemas.getText().isEmpty() || textFieldTipoDocumento.getText().isEmpty()
                     || textFieldTitulo.getText().isEmpty()){
                 datosErroenes(true);
-                Alert alertInfo = new Alert(Alert.AlertType.WARNING);
-                alertInfo.setTitle("Numero invalido");
-                alertInfo.setHeaderText("Numero de copias invalido");
-                alertInfo.setContentText("El numero de copias no puede ser 0 o menor a 0, por favor de escribir un numero mayor a 0");
+                Alert alertInfo = new Alert(Alert.AlertType.ERROR);
+                alertInfo.setTitle("Datos vacíos");
+                alertInfo.setContentText("Los datos ingresados son vacions, por favor de validar que los datos sean correctos.");
                 alertInfo.showAndWait();
             }else{
                 if(datosCorrectos(true) == true){
