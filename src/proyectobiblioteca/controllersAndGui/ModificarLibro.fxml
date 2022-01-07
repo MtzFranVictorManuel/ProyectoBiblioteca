@@ -6,41 +6,49 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="465.0" prefWidth="639.0" style="-fx-background-color: white;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="proyectobiblioteca.controllersAndGui.ModificarLibroController">
+<AnchorPane id="AnchorPane" prefHeight="542.0" prefWidth="826.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="proyectobiblioteca.controllersAndGui.ModificarLibroController">
    <children>
-      <Label layoutX="11.0" layoutY="32.0" text="Titulo:" />
-      <Label layoutX="11.0" layoutY="66.0" text="Autor:" />
-      <Label layoutX="10.0" layoutY="98.0" text="Editor:" />
-      <Label layoutX="10.0" layoutY="135.0" text="Tema (s):" />
-      <Label layoutX="10.0" layoutY="171.0" text="Descripción:" />
-      <Label layoutX="10.0" layoutY="278.0" text="Clasificación LC:" />
-      <TextField fx:id="textFieldTitulo" layoutX="56.0" layoutY="28.0" prefHeight="26.0" prefWidth="247.0" />
-      <TextField fx:id="textFieldAutor" layoutX="56.0" layoutY="61.0" prefHeight="26.0" prefWidth="247.0" />
-      <TextField fx:id="textFieldEditor" layoutX="56.0" layoutY="93.0" prefHeight="26.0" prefWidth="247.0" />
-      <TextField fx:id="textFieldTemas" layoutX="70.0" layoutY="131.0" prefHeight="26.0" prefWidth="233.0" />
-      <TextArea fx:id="textFieldDescripcion" layoutX="12.0" layoutY="195.0" prefHeight="75.0" prefWidth="293.0" />
-      <TextField fx:id="textFieldClasificacionLC" layoutX="106.0" layoutY="274.0" prefHeight="26.0" prefWidth="199.0" />
-      <Label layoutX="11.0" layoutY="311.0" text="Codigo de barra:" />
-      <TextField fx:id="textFieldCodigoBarras" layoutX="106.0" layoutY="307.0" prefHeight="26.0" prefWidth="199.0" />
-      <Button layoutX="15.0" layoutY="413.0" mnemonicParsing="false" onAction="#clicSalir" text="Salir" />
-      <Button layoutX="509.0" layoutY="413.0" mnemonicParsing="false" onAction="#clicGuardarCambios" text="Guardar Cambios" />
-      <Label layoutX="324.0" layoutY="33.0" text="ISBN:" />
-      <Label layoutX="324.0" layoutY="66.0" text="Edición:" />
-      <Label layoutX="324.0" layoutY="98.0" text="Volumen:" />
-      <Label layoutX="324.0" layoutY="136.0" text="Idioma:" />
-      <Label layoutX="324.0" layoutY="171.0" text="Serie:" />
-      <Label layoutX="324.0" layoutY="205.0" text="Tipo de obra literaria:" />
-      <Label layoutX="321.0" layoutY="244.0" text="Fecha de publicación:" />
-      <TextField fx:id="textFieldIsbn" layoutX="357.0" layoutY="29.0" prefHeight="26.0" prefWidth="260.0" />
-      <TextField fx:id="textFieldEdicion" layoutX="376.0" layoutY="62.0" prefHeight="26.0" prefWidth="241.0" />
-      <TextField fx:id="textFieldVolumen" layoutX="381.0" layoutY="94.0" prefHeight="26.0" prefWidth="233.0" />
-      <TextField fx:id="textFieldIdioma" layoutX="367.0" layoutY="132.0" prefHeight="26.0" prefWidth="247.0" />
-      <TextField fx:id="textFieldSerie" layoutX="367.0" layoutY="167.0" prefHeight="26.0" prefWidth="247.0" />
-      <TextField fx:id="textFieldTipoObra" layoutX="440.0" layoutY="201.0" prefHeight="26.0" prefWidth="173.0" />
-      <DatePicker fx:id="datePickerFechaPublicacion" layoutX="440.0" layoutY="240.0" />
-      <Label layoutX="13.0" layoutY="343.0" text="Numero de copias:" />
-      <TextField fx:id="textFielNumeroCopias" layoutX="120.0" layoutY="339.0" prefHeight="25.0" prefWidth="184.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="90.0" stroke="BLACK" strokeType="INSIDE" width="826.0" />
+      <Label layoutX="80.0" layoutY="118.0" text="Titulo:" />
+      <Label layoutX="81.0" layoutY="197.0" text="Autor:" />
+      <Label layoutX="80.0" layoutY="237.0" text="Editor:" />
+      <Label layoutX="72.0" layoutY="318.0" text="Tema (s):" />
+      <Label layoutX="367.0" layoutY="379.0" text="Descripción:" />
+      <Label layoutX="36.0" layoutY="363.0" text="Clasificación LC:" />
+      <TextField fx:id="textFieldTitulo" layoutX="137.0" layoutY="113.0" prefHeight="26.0" prefWidth="548.0" />
+      <TextField fx:id="textFieldAutor" layoutX="137.0" layoutY="193.0" prefHeight="26.0" prefWidth="199.0" />
+      <TextField fx:id="textFieldEditor" layoutX="137.0" layoutY="232.0" prefHeight="26.0" prefWidth="199.0" />
+      <TextField fx:id="textFieldTemas" layoutX="137.0" layoutY="313.0" prefHeight="26.0" prefWidth="199.0" />
+      <TextArea fx:id="textFieldDescripcion" layoutX="367.0" layoutY="406.0" prefHeight="75.0" prefWidth="431.0" />
+      <TextField fx:id="textFieldClasificacionLC" layoutX="137.0" layoutY="358.0" prefHeight="26.0" prefWidth="199.0" />
+      <Label layoutX="36.0" layoutY="411.0" text="Codigo de barra:" />
+      <TextField fx:id="textFieldCodigoBarras" layoutX="137.0" layoutY="406.0" prefHeight="26.0" prefWidth="199.0" />
+      <Button layoutX="24.0" layoutY="502.0" mnemonicParsing="false" onAction="#clicSalir" text="Salir" />
+      <Button layoutX="684.0" layoutY="502.0" mnemonicParsing="false" onAction="#clicGuardarCambios" text="Guardar Cambios" />
+      <Label layoutX="82.0" layoutY="162.0" text="ISBN:" />
+      <Label layoutX="435.0" layoutY="197.0" text="Edición:" />
+      <Label layoutX="418.0" layoutY="237.0" text="Volumen:" />
+      <Label layoutX="78.0" layoutY="277.0" text="Idioma:" />
+      <Label layoutX="444.0" layoutY="276.0" text="Serie:" />
+      <Label layoutX="369.0" layoutY="317.0" text="Tipo de obra literaria:" />
+      <Label layoutX="367.0" layoutY="358.0" text="Fecha de publicación:" />
+      <TextField fx:id="textFieldIsbn" layoutX="137.0" layoutY="157.0" prefHeight="26.0" prefWidth="199.0" />
+      <TextField fx:id="textFieldEdicion" layoutX="497.0" layoutY="192.0" prefHeight="26.0" prefWidth="186.0" />
+      <TextField fx:id="textFieldVolumen" layoutX="496.0" layoutY="232.0" prefHeight="26.0" prefWidth="186.0" />
+      <TextField fx:id="textFieldIdioma" layoutX="137.0" layoutY="272.0" prefHeight="26.0" prefWidth="199.0" />
+      <TextField fx:id="textFieldSerie" layoutX="498.0" layoutY="271.0" prefHeight="26.0" prefWidth="186.0" />
+      <TextField fx:id="textFieldTipoObra" layoutX="496.0" layoutY="312.0" prefHeight="26.0" prefWidth="186.0" />
+      <DatePicker fx:id="datePickerFechaPublicacion" layoutX="498.0" layoutY="354.0" />
+      <Label layoutX="27.0" layoutY="457.0" text="Numero de copias:" />
+      <TextField fx:id="textFielNumeroCopias" layoutX="137.0" layoutY="453.0" prefHeight="26.0" prefWidth="165.0" />
+      <Text layoutX="65.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Modificar libro">
+         <font>
+            <Font name="Arial Bold" size="48.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>

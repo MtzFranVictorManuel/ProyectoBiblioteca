@@ -105,7 +105,7 @@ public class ModificarMultimediaController implements Initializable {
         navigationScreen("ModificarEliminarRecursoDocumental.fxml");
     }
     
-    public void clicRegistrar(ActionEvent actionEvent){
+    public void clicGuardarCambios(ActionEvent actionEvent){
         try{
             String codigoBarra = textFieldCodigoBarras.getText();
             String tituloLibro = textFieldTitulo.getText();

@@ -14,7 +14,7 @@ public class ProyectoBiblioteca extends Application {
     @Override
     public void start(Stage stage) {
         try{
-        Parent root = FXMLLoader.load(getClass().getResource("controllersAndGui/ModificarEliminarRecursoDocumental.fxml"));       
+        Parent root = FXMLLoader.load(getClass().getResource("controllersAndGui/InicioRegistroModificar.fxml"));       
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.setResizable(false);
@@ -31,5 +31,6 @@ public class ProyectoBiblioteca extends Application {
     public static void main(String[] args) {      
         launch(args);
     }
+    
     
 }

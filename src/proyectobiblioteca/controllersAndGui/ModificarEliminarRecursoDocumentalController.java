@@ -100,7 +100,7 @@ public class ModificarEliminarRecursoDocumentalController implements Initializab
     }    
     
     public void clicSalir(ActionEvent actionEvent){
-        
+        navigationScreen("InicioRegistroModificar.fxml"); 
     }
 
     public void clicEditar(ActionEvent actionEvent){

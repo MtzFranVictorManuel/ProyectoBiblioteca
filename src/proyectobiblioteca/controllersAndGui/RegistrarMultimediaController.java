@@ -1,5 +1,6 @@
 package proyectobiblioteca.controllersAndGui;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Time;
 import java.util.Optional;
@@ -10,12 +11,15 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
+import javafx.stage.Stage;
 import proyectobiblioteca.bussinesslogic.DocumentalDAO;
 import proyectobiblioteca.bussinesslogic.MultimediaDAO;
 import proyectobiblioteca.domain.Documental;
@@ -78,8 +82,7 @@ public class RegistrarMultimediaController implements Initializable {
     }    
     
     public void clicSalir(ActionEvent actionEvent){
-        
-        
+        navigationScreen("InicioRegistroModificar.fxml");       
     }
     
     public void clicRegistrar(ActionEvent actionEvent){
@@ -308,5 +311,17 @@ public class RegistrarMultimediaController implements Initializable {
         textFieldTemas.setText("");
         textFieldTipoDocumento.setText("");
         textFieldTitulo.setText("");
+    }
+    
+    public void navigationScreen(String url) {
+        try {
+            Stage stage = (Stage) textFieldAutor.getScene().getWindow();
+            Scene scene = new Scene(FXMLLoader.load(getClass().getResource(url)));
+            stage.setScene(scene);
+            stage.setResizable(false);
+            stage.show();
+        }catch(IOException ex) {
+            System.out.println(ex.getMessage());
+        }
     }
 }

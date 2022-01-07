@@ -5,36 +5,45 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="631.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="proyectobiblioteca.controllersAndGui.RegistrarMultimediaController">
+<AnchorPane id="AnchorPane" prefHeight="498.0" prefWidth="719.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="proyectobiblioteca.controllersAndGui.RegistrarMultimediaController">
    <children>
-      <Label layoutX="16.0" layoutY="25.0" text="Titulo:" />
-      <Label layoutX="16.0" layoutY="59.0" text="Autor:" />
-      <Label layoutX="15.0" layoutY="91.0" text="Editor:" />
-      <Label layoutX="15.0" layoutY="128.0" text="Tema (s):" />
-      <Label layoutX="15.0" layoutY="164.0" text="Descripción:" />
-      <Label layoutX="15.0" layoutY="271.0" text="Clasificación LC:" />
-      <TextField fx:id="textFieldTitulo" layoutX="61.0" layoutY="21.0" prefHeight="26.0" prefWidth="247.0" />
-      <TextField fx:id="textFieldAutor" layoutX="61.0" layoutY="54.0" prefHeight="26.0" prefWidth="247.0" />
-      <TextField fx:id="textFieldEditor" layoutX="61.0" layoutY="86.0" prefHeight="26.0" prefWidth="247.0" />
-      <TextField fx:id="textFieldTemas" layoutX="75.0" layoutY="124.0" prefHeight="26.0" prefWidth="233.0" />
-      <TextArea fx:id="textFieldDescripcion" layoutX="17.0" layoutY="188.0" prefHeight="75.0" prefWidth="293.0" />
-      <TextField fx:id="textFieldClasificacionLC" layoutX="111.0" layoutY="267.0" prefHeight="26.0" prefWidth="199.0" />
-      <Label layoutX="16.0" layoutY="304.0" text="Codigo de barra:" />
-      <TextField fx:id="textFieldCodigoBarras" layoutX="111.0" layoutY="300.0" prefHeight="26.0" prefWidth="199.0" />
-      <Button layoutX="22.0" layoutY="354.0" mnemonicParsing="false" onAction="#clicSalir" text="Salir" />
-      <Button layoutX="549.0" layoutY="354.0" mnemonicParsing="false" onAction="#clicRegistrar" text="Registrar" />
-      <Label layoutX="329.0" layoutY="25.0" text="Duración:" />
-      <Label layoutX="331.0" layoutY="91.0" text="Formato:" />
-      <Label layoutX="329.0" layoutY="128.0" text="Tipo de documento multimedia:" />
-      <TextField fx:id="textFieldDuraionHora" alignment="CENTER" layoutX="363.0" layoutY="46.0" onKeyTyped="#maximoTiempo" prefHeight="26.0" prefWidth="41.0" promptText="00" />
-      <TextField fx:id="textFieldFormato" layoutX="384.0" layoutY="86.0" prefHeight="26.0" prefWidth="233.0" />
-      <TextField fx:id="textFieldTipoDocumento" layoutX="329.0" layoutY="151.0" prefHeight="26.0" prefWidth="293.0" />
-      <Text layoutX="329.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hora:" />
-      <Text layoutX="415.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Min:" />
-      <TextField fx:id="textFieldDuraionMinutos" alignment="CENTER" layoutX="445.0" layoutY="47.0" onKeyTyped="#maximoTiempo" prefHeight="26.0" prefWidth="41.0" promptText="00" />
-      <Text layoutX="501.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Seg:" />
-      <TextField fx:id="textFieldDuraionSegundos" alignment="CENTER" layoutX="535.0" layoutY="48.0" onKeyTyped="#maximoTiempo" prefHeight="26.0" prefWidth="41.0" promptText="00" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="75.0" layoutX="352.0" layoutY="158.0" stroke="BLACK" strokeType="INSIDE" width="343.0" />
+      <Label layoutX="89.0" layoutY="120.0" text="Titulo:" />
+      <Label layoutX="90.0" layoutY="158.0" text="Autor:" />
+      <Label layoutX="89.0" layoutY="197.0" text="Editor:" />
+      <Label layoutX="72.0" layoutY="238.0" text="Tema (s):" />
+      <Label layoutX="38.0" layoutY="353.0" text="Descripción:" />
+      <Label layoutX="34.0" layoutY="275.0" text="Clasificación LC:" />
+      <TextField fx:id="textFieldTitulo" layoutX="136.0" layoutY="115.0" prefHeight="26.0" prefWidth="556.0" />
+      <TextField fx:id="textFieldAutor" layoutX="136.0" layoutY="154.0" prefHeight="26.0" prefWidth="199.0" />
+      <TextField fx:id="textFieldEditor" layoutX="136.0" layoutY="192.0" prefHeight="26.0" prefWidth="199.0" />
+      <TextField fx:id="textFieldTemas" layoutX="136.0" layoutY="233.0" prefHeight="26.0" prefWidth="199.0" />
+      <TextArea fx:id="textFieldDescripcion" layoutX="38.0" layoutY="370.0" prefHeight="68.0" prefWidth="660.0" />
+      <TextField fx:id="textFieldClasificacionLC" layoutX="136.0" layoutY="271.0" prefHeight="26.0" prefWidth="199.0" />
+      <Label layoutX="34.0" layoutY="315.0" text="Codigo de barra:" />
+      <TextField fx:id="textFieldCodigoBarras" layoutX="136.0" layoutY="310.0" prefHeight="26.0" prefWidth="199.0" />
+      <Button layoutX="41.0" layoutY="458.0" mnemonicParsing="false" onAction="#clicSalir" text="Salir" />
+      <Button layoutX="630.0" layoutY="458.0" mnemonicParsing="false" onAction="#clicRegistrar" text="Registrar" />
+      <Label layoutX="357.0" layoutY="158.0" text="Duración:" />
+      <Label layoutX="352.0" layoutY="249.0" text="Formato:" />
+      <Label layoutX="352.0" layoutY="282.0" text="Tipo de documento multimedia:" />
+      <TextField fx:id="textFieldDuraionHora" alignment="CENTER" layoutX="423.0" layoutY="196.0" onKeyTyped="#maximoTiempo" prefHeight="26.0" prefWidth="41.0" promptText="00" />
+      <TextField fx:id="textFieldFormato" layoutX="410.0" layoutY="245.0" prefHeight="26.0" prefWidth="285.0" />
+      <TextField fx:id="textFieldTipoDocumento" layoutX="354.0" layoutY="305.0" prefHeight="26.0" prefWidth="343.0" />
+      <Text layoutX="386.0" layoutY="214.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hora:" />
+      <Text layoutX="500.0" layoutY="215.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Min:" />
+      <TextField fx:id="textFieldDuraionMinutos" alignment="CENTER" layoutX="532.0" layoutY="197.0" onKeyTyped="#maximoTiempo" prefHeight="26.0" prefWidth="41.0" promptText="00" />
+      <Text layoutX="605.0" layoutY="214.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Seg:" />
+      <TextField fx:id="textFieldDuraionSegundos" alignment="CENTER" layoutX="642.0" layoutY="197.0" onKeyTyped="#maximoTiempo" prefHeight="26.0" prefWidth="41.0" promptText="00" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="88.0" layoutX="-2.0" stroke="BLACK" strokeType="INSIDE" width="725.0" />
+      <Text layoutX="48.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Registrar multimedia">
+         <font>
+            <Font name="Arial Bold" size="48.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>
